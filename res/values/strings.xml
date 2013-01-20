@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LeagueBench</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="Marquee">Welcome to LoLBuilder!</string>
+    <string name="create_build_button">Create Build</string>
+
+</resources>
