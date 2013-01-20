@@ -5,15 +5,13 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Button;
 import android.widget.ImageView;
 
 public class Database {
@@ -91,9 +89,7 @@ public class Database {
 	//Build saver Table
 	private static final String DATABASE_TABLE_SAVEBUILD = "save_build_table";
 	
-	//saved item iconstuff
-	
-	
+	//saved item iconstuff	
 	public static final String KEY_SAVEITEMBUTTON0 = "saveitem_button0";
 	public static final String KEY_SAVEITEMBUTTON1 = "saveitem_button1";
 	public static final String KEY_SAVEITEMBUTTON2 = "saveitem_button2";
@@ -113,26 +109,26 @@ public class Database {
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			// TODO Auto-generated method stub
+			// Building table for Champion Icons
 			db.execSQL(
 					"CREATE TABLE " + DATABASE_TABLE_CHAMP_ICONS + " (" + KEY_ICONROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ KEY_ICONNAME + " TEXT NOT NULL, " + KEY_ICON + " INTEGER NOT NULL, " + KEY_BUTTON + " INTEGER NOT NULL, "
 					+ KEY_BANNER + " INTEGER NOT NULL);" 
 			);
-			
+			// Building table for Item Stats
 			db.execSQL(
 					"CREATE TABLE " + DATABASE_TABLE_ITEMSTATS + " (" + KEY_ITEMSTATSID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ KEY_ITEMNAME + " TEXT NOT NULL, " + KEY_ITEMMS + " REAL, " + KEY_ITEMHP + " INTEGER, " + KEY_ITEMHPR + 
 					" INTEGER, " + KEY_ITEMAR + " INTEGER, " + KEY_ITEMAD + " INTEGER, " + KEY_ITEMAP + " INTEGER, " +
 					KEY_ITEMMP + " INTEGER, " + KEY_ITEMMPR + " INTEGER, " + KEY_ITEMMR + " INTEGER, " + KEY_ITEMUNIQUEMS + " REAL);" 
 			);
-			
+			// Building table for Item Icons
 			db.execSQL(
 					"CREATE TABLE " + DATABASE_TABLE_ITEMICONS + " (" + KEY_ITEMICONID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ KEY_ITEMICONNAME + " TEXT NOT NULL, " + KEY_ITEMICON + " INTEGER NOT NULL, " + KEY_ITEMBUTTON + 
 					" INTEGER NOT NULL);" 
 			);
-			
+			// Building table for Champ Stats
 			db.execSQL("CREATE TABLE " + DATABASE_TABLE_CHAMPSTATS + " (" + KEY_CHAMPSTATSID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_CHAMPSTATSNAME + " TEXT NOT NULL, "
 					+ KEY_CHAMPHP + " REAL NOT NULL, " + KEY_CHAMPHPPL + " REAL NOT NULL, " + KEY_CHAMPHR + " REAL NOT NULL, "
 					+ KEY_CHAMPHRPL + " REAL NOT NULL, " + KEY_CHAMPMP + " REAL NOT NULL, " + KEY_CHAMPMPPL + " REAL NOT NULL, "
@@ -142,8 +138,7 @@ public class Database {
 					+ KEY_CHAMPARPL + " REAL NOT NULL, " + KEY_CHAMPMR + " REAL NOT NULL, " + KEY_CHAMPMRPL + " REAL NOT NULL, " 
 					+ KEY_CHAMPMS + " REAL NOT NULL, " + KEY_CHAMPRANGE + " REAL NOT NULL);"
 			);
-			
-			//saved builds
+			// Building table for saving/editing builds
 			db.execSQL(
 					"CREATE TABLE " + DATABASE_TABLE_SAVEBUILD + " (" + KEY_SAVEITEMBUTTON0 + " INTEGER, " 
 					+ KEY_SAVEITEMBUTTON1 + "INTEGER, " + KEY_SAVEITEMBUTTON2 + "INTEGER, "
@@ -154,12 +149,12 @@ public class Database {
 			try{
 				generateChampIconsTable(db);
 				generateItemIconTable(db);
+				generateChampStatsTable(db);
+				generateItemsTable(db);
 			}
 			catch(SQLiteException e){
 				e.printStackTrace();
 			}
-			generateChampStatsTable(db);
-			generateItemsTable(db);
 			
 		}
 
@@ -501,8 +496,6 @@ public class Database {
 			while(input.hasNext()){
 				String stat;
 				String num[];
-				String numStat[];
-				StringTokenizer unique;
 				StringTokenizer line = new StringTokenizer(input.nextLine());
 				String item_name = line.nextToken("~");
 				cv.put(KEY_ITEMNAME, item_name);
@@ -569,12 +562,8 @@ public class Database {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		String[] columns = new String[] {KEY_ICONROWID, KEY_ICONNAME, KEY_ICON, KEY_BUTTON, KEY_BANNER};
 		Cursor c = ourDatabase.query(DATABASE_TABLE_CHAMP_ICONS, columns, KEY_BUTTON, null, null, null, KEY_ICONNAME);
-		int ibutton = c.getColumnIndex(KEY_BUTTON);
 		int iIcon = c.getColumnIndex(KEY_ICON);
 		for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
-			//Button b = new Button(ourContext);
-			//b.setBackgroundResource(c.getInt(ibutton));
-			//b.setId(c.getInt(iIcon));
 			result.add(c.getInt(iIcon));
 		}
 		return result;
@@ -627,7 +616,6 @@ public class Database {
 	public HashMap<String, Integer> getItemCategoryAP() throws SQLiteException {
 		
 		HashMap<String, Integer> itemList = new HashMap<String, Integer>();
-		//ArrayList<String> items = new ArrayList<String>();
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMAP + " > 0" , null);
@@ -683,21 +671,6 @@ public class Database {
 			result.put(c1.getString(nameCol), c1.getInt(iconCol));
 		}
 		
-		
-		/*c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
-				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
-				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMAS + " > 0", null);
-		nameCol = c1.getColumnIndex(KEY_ITEMNAME);
-		iconCol = c1.getColumnIndex(KEY_ITEMBUTTON);
-		if(c1.moveToFirst()){
-			result.put(c1.getString(nameCol), c1.getInt(iconCol));
-		}
-		else
-			return null;
-		while(c1.moveToNext()){
-			result.put(c1.getString(nameCol), c1.getInt(iconCol));
-		}*/
-		
 		return result;
 	}
 	
@@ -725,7 +698,6 @@ public class Database {
 	public HashMap<String, Integer> getItemCategoryDefense() throws SQLiteException {
 		
 		HashMap<String, Integer> itemList = new HashMap<String, Integer>();
-		//ArrayList<String> items = new ArrayList<String>();
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND (" 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMAR + " > 0" + " OR " + DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMR + " > 0)", null);
@@ -816,8 +788,6 @@ public class Database {
 	public HashMap<String, Double> getUniqueItemMS(String itemName) {
 		
 		HashMap<String, Double> result = new HashMap<String, Double>();
-		String stats[];
-		String numStat[];
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + " WHERE " + KEY_ITEMNAME + " = ?", new String[] {itemName});
 		int col = c1.getColumnIndex(KEY_ITEMUNIQUEMS);
 		if(c1.moveToFirst()) {

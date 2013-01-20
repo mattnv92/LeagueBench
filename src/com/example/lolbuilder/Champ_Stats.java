@@ -11,8 +11,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -289,14 +287,6 @@ public class Champ_Stats extends Activity{
 					msStat += currSpeed;
 			}
 			msStat += currSpeed;
-			
-			Display display = getWindowManager().getDefaultDisplay();
-			DisplayMetrics metrics = new DisplayMetrics();
-			display.getMetrics(metrics);
-			int width = metrics.widthPixels;
-			int height = metrics.heightPixels;
-			
-			//msStat = width;
 			// end of movement speed stack fixing
 			
 			//time to add in the percentages of the speed after adding the appropriate ms from the boots chosen if any boots were chosen at all
@@ -380,26 +370,18 @@ public class Champ_Stats extends Activity{
 			msTv.setTextSize(TEXT_SIZE);
 			rl.addView(msTv);
 			
-			DisplayMetrics displaymetrics = new DisplayMetrics();
-			getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-			final int h = displaymetrics.heightPixels;
-			final int w = displaymetrics.widthPixels;
-			
-			
 			final RelativeLayout rel = (RelativeLayout)findViewById(R.id.csrl);
 			RelativeLayout.LayoutParams lpl = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 			Button b = new Button(this);
 			final PopupWindow popUp = new PopupWindow(this);
 			b.setText("Level");
+			
 			//level up dialog
-			final RelativeLayout drl = new RelativeLayout(this);
-			final RelativeLayout.LayoutParams dlp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			final AlertDialog d = new AlertDialog.Builder(this).create();
 			final EditText et = new EditText(this);
 			et.setInputType(InputType.TYPE_CLASS_NUMBER);
 			et.setText("" + setLevel);
-			d.setTitle("Wanna level dis hoe up?");
-			Button ok = new Button(this);
+			d.setTitle("Level Up");
 			d.setView(et);
 			
 			final AlertDialog err = new AlertDialog.Builder(this).create();
@@ -473,12 +455,10 @@ public class Champ_Stats extends Activity{
 		            }
 				};
 			
+			//save button
 			lpl = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 			Button save = new Button(this);
 			save.setText("Save");
-			//level up dialog
-			d.setTitle("Wanna level dis hoe up?");
-			d.setView(et);
 			
 			
 		}
