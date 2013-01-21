@@ -6,6 +6,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -56,6 +57,7 @@ public class Champ_Stats extends Activity{
 	int setLevel = 1;
 	
 	private Database db;
+	private Context con;
 	
 	//champ stats list
 	private HashMap<String, Double> champStats = new HashMap<String, Double>();
@@ -79,6 +81,7 @@ public class Champ_Stats extends Activity{
 	
 	public void init_banner(int BannerId) {
 		
+		con = Champ_Stats.this;
 		db = new Database(this);
 		HashMap<String, Double> item0 = new HashMap<String, Double>();
 		HashMap<String, Double> item1 = new HashMap<String, Double>();
@@ -454,7 +457,22 @@ public class Champ_Stats extends Activity{
 			OnClickListener save_listener = new OnClickListener() { 
 				@Override
 				public void onClick(View v) {
-						db.saveBuild(saveBuild, champName);
+					
+						try{
+							db.openRead();
+							db.saveBuild(saveBuild, champName);
+						}
+						catch(Exception e){
+							Dialog d = new Dialog(con);
+							d.setTitle("Uh Oh!");
+							TextView tv = new TextView(con);
+							tv.setText(e.getMessage());
+							d.setContentView(tv);
+							d.show();
+						}
+						finally{
+								db.close();
+						}
 		            }
 				};
 			
@@ -463,6 +481,7 @@ public class Champ_Stats extends Activity{
 			lpl.addRule(RelativeLayout.BELOW, LEVEL_BUTTON_ID);
 			Button save = new Button(this);
 			save.setText("Save");
+			save.setOnClickListener(save_listener);
 			rel.addView(save, lpl);
 			
 			

@@ -536,10 +536,15 @@ public class Database {
 			
 		}
 		
+		
 	}
 	
 	public Database(Context c) {
 		ourContext = c;
+	}
+	
+	public boolean isDbOpen() {
+		return ourHelper != null;
 	}
 	
 	public Database openRead() {
@@ -552,14 +557,15 @@ public class Database {
 		ourHelper.close();
 	}
 	
-	public void saveBuild(HashMap<String, Double> buildList, String champName) {
+	public void saveBuild(HashMap<String, Double> buildList, String champName) throws SQLiteException {
+			ContentValues cv = new ContentValues();
+			cv.put(KEY_SAVECHAMPNAME, champName);
+			if(buildList.get("item0") != null)
+				cv.put(KEY_SAVEITEMBUTTON0, buildList.get("item0"));
+			cv.put(KEY_SAVEITEMBUTTON0, 10);
+			ourDatabase.insert(DATABASE_TABLE_SAVEBUILD, null, cv);
+			cv.clear();
 		
-		ContentValues cv = new ContentValues();
-		cv.put(KEY_SAVECHAMPNAME, champName);
-		if(buildList.get("item0") != null)
-			cv.put(KEY_SAVEITEMBUTTON0, buildList.get("item0"));
-		ourDatabase.insertOrThrow(DATABASE_TABLE_SAVEBUILD, null, cv);
-		cv.clear();
 		
 	}
 	
@@ -837,5 +843,18 @@ public class Database {
 			return itemMap;
 		}
 		 return null;
+	}
+	
+	public String[] getSavedBuilds() {
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_SAVEBUILD , null);
+		int resultCol = c1.getColumnIndex(KEY_SAVECHAMPNAME);
+		String[] result = new String[c1.getCount()];
+		if(c1.moveToFirst()){
+			for(int i = 0; i < result.length; i++){
+				result[i] = c1.getString(resultCol);
+				c1.moveToNext();
+			}
+		}
+		return result;
 	}
 }
