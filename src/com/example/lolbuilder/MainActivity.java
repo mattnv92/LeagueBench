@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnClickListener{
 
-	Button cb_Button; 
+	private Button cb_Button; 
+	private Button lb_Button;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,15 +24,30 @@ public class MainActivity extends Activity implements OnClickListener{
     }
 
     public void initialize(){
+    	
+    	 OnClickListener lb_listener = new OnClickListener() { 
+ 			public void onClick(View v) {
+ 				try {
+ 					Class load_build = Class.forName("com.example.lolbuilder.Build_List");
+ 					Intent lb_intent = new Intent(MainActivity.this, load_build);
+ 					startActivity(lb_intent);
+ 				} catch (ClassNotFoundException e) {
+ 					// TODO Auto-generated catch block
+ 					e.printStackTrace();
+ 				}
+ 			}
+ 			
+         };
+    	
     	cb_Button = (Button)findViewById(R.id.cb_Button);
     	cb_Button.setOnClickListener(this);
-    	TextView tv = (TextView)findViewById(R.id.cb_et);
+    	cb_Button.setText("Create Build");
+    	cb_Button.setTextSize(40);
+    	lb_Button = (Button)findViewById(R.id.lb_Button);
+    	lb_Button.setOnClickListener(lb_listener);
+    	lb_Button.setText("Load Build");
+    	lb_Button.setTextSize(40);
     	
-    	/*DisplayMetrics displaymetrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-		final int h = displaymetrics.heightPixels;
-		final int w = displaymetrics.widthPixels;
-    	tv.setText("" + h);*/
     }
     
     

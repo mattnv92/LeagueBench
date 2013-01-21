@@ -34,6 +34,7 @@ public class Champ_Stats extends Activity{
 	private final int ABILITY_POWER_TV_ID = 1006;
 	private final int MANA_TV_ID = 1007;
 	private final int MOVEMENT_SPEED_TV_ID = 1008;
+	private final int LEVEL_BUTTON_ID = 1009;
 	private final int TEXT_SIZE = 20;
 	public String champName;
 	public boolean click = true;
@@ -115,6 +116,7 @@ public class Champ_Stats extends Activity{
 			adStat += champStats.get("AD");
 			mpStat += champStats.get("MP");
 			msStat += champStats.get("MS");
+			
 			
 			if(array[0] != 0){
 				itemName = db.getItemById(array[0]);
@@ -435,11 +437,11 @@ public class Champ_Stats extends Activity{
 				
 			
 			b.setOnClickListener(b_listener);
-
-	   
 			lpl.addRule(RelativeLayout.BELOW, R.id.champ_stats_sv);
 			b.setLayoutParams(lpl);
+			b.setId(LEVEL_BUTTON_ID);
 			rel.addView(b);
+			
 			LinearLayout ll = new LinearLayout(this);
 			LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1);
 			TextView tvLvl = new TextView(this);
@@ -448,17 +450,20 @@ public class Champ_Stats extends Activity{
 			popUp.setContentView(ll);
 			ll.addView(tvLvl, lllp);
 			
+			//listener used to update database about a saved build
 			OnClickListener save_listener = new OnClickListener() { 
 				@Override
 				public void onClick(View v) {
-						db.saveBuild(saveBuild);
+						db.saveBuild(saveBuild, champName);
 		            }
 				};
 			
 			//save button
 			lpl = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			lpl.addRule(RelativeLayout.BELOW, LEVEL_BUTTON_ID);
 			Button save = new Button(this);
 			save.setText("Save");
+			rel.addView(save, lpl);
 			
 			
 		}

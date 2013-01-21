@@ -164,16 +164,15 @@ public final class R {
         public static final int AD=0x7f08000c;
         public static final int AP=0x7f08000d;
         public static final int MS=0x7f08000e;
-        public static final int button1=0x7f080012;
         public static final int cb_Button=0x7f080000;
-        public static final int cb_et=0x7f080001;
         public static final int champ_stats_sv=0x7f080006;
         public static final int csrl=0x7f080005;
         public static final int defense=0x7f08000a;
         public static final int gridview=0x7f080002;
         public static final int health=0x7f08000b;
         public static final int horizontalScrollView1=0x7f08000f;
-        public static final int menu_settings=0x7f080013;
+        public static final int lb_Button=0x7f080001;
+        public static final int menu_settings=0x7f080012;
         public static final int nextbutton=0x7f080011;
         public static final int rlchamp_menu=0x7f080004;
         public static final int rlchamp_stats=0x7f080007;
@@ -184,10 +183,10 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int champion_menu=0x7f030001;
-        public static final int champion_stats=0x7f030002;
-        public static final int item_menu=0x7f030003;
-        public static final int main_menu=0x7f030004;
+        public static final int build_list=0x7f030001;
+        public static final int champion_menu=0x7f030002;
+        public static final int champion_stats=0x7f030003;
+        public static final int item_menu=0x7f030004;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
@@ -200,7 +199,6 @@ public final class R {
     public static final class string {
         public static final int Marquee=0x7f050003;
         public static final int app_name=0x7f050000;
-        public static final int create_build_button=0x7f050004;
         public static final int hello_world=0x7f050001;
         public static final int menu_settings=0x7f050002;
     }

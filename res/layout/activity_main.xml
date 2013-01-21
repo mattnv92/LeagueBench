@@ -15,15 +15,15 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight=".2"
-        android:text="@string/create_build_button"
         android:textColor="#EEEEEE"
         />
     
     <Button 
-        android:id="@+id/cb_et"
+        android:id="@+id/lb_Button"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight=".2"
+        android:textColor="#EEEEEE"
         />
     
     </LinearLayout>

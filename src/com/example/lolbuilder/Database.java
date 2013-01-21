@@ -89,7 +89,8 @@ public class Database {
 	//Build saver Table
 	private static final String DATABASE_TABLE_SAVEBUILD = "save_build_table";
 	
-	//saved item iconstuff	
+	//saved item iconstuff
+	public static final String KEY_SAVECHAMPNAME = "savechamp_name";
 	public static final String KEY_SAVEITEMBUTTON0 = "saveitem_button0";
 	public static final String KEY_SAVEITEMBUTTON1 = "saveitem_button1";
 	public static final String KEY_SAVEITEMBUTTON2 = "saveitem_button2";
@@ -140,7 +141,7 @@ public class Database {
 			);
 			// Building table for saving/editing builds
 			db.execSQL(
-					"CREATE TABLE " + DATABASE_TABLE_SAVEBUILD + " (" + KEY_SAVEITEMBUTTON0 + " INTEGER, " 
+					"CREATE TABLE " + DATABASE_TABLE_SAVEBUILD + " (" + KEY_SAVECHAMPNAME + " TEXT NOT NULL, " + KEY_SAVEITEMBUTTON0 + " INTEGER, " 
 					+ KEY_SAVEITEMBUTTON1 + "INTEGER, " + KEY_SAVEITEMBUTTON2 + "INTEGER, "
 					+ KEY_SAVEITEMBUTTON3 + "INTEGER, " + KEY_SAVEITEMBUTTON4 + "INTEGER, "
 					+ KEY_SAVEITEMBUTTON5 + "INTEGER);" 
@@ -551,10 +552,14 @@ public class Database {
 		ourHelper.close();
 	}
 	
-	public void saveBuild(HashMap<String, Double> buildList) {
+	public void saveBuild(HashMap<String, Double> buildList, String champName) {
+		
 		ContentValues cv = new ContentValues();
+		cv.put(KEY_SAVECHAMPNAME, champName);
 		if(buildList.get("item0") != null)
 			cv.put(KEY_SAVEITEMBUTTON0, buildList.get("item0"));
+		ourDatabase.insertOrThrow(DATABASE_TABLE_SAVEBUILD, null, cv);
+		cv.clear();
 		
 	}
 	
