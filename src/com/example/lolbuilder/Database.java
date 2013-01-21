@@ -90,7 +90,10 @@ public class Database {
 	private static final String DATABASE_TABLE_SAVEBUILD = "save_build_table";
 	
 	//saved item iconstuff
+	public static final String KEY_SAVEID = "_id";
 	public static final String KEY_SAVECHAMPNAME = "savechamp_name";
+	public static final String KEY_SAVEBUILDNAME = "savebuild_name";
+	public static final String KEY_SAVECHAMPICONID = "savechamp_iconid";
 	public static final String KEY_SAVEITEMBUTTON0 = "saveitem_button0";
 	public static final String KEY_SAVEITEMBUTTON1 = "saveitem_button1";
 	public static final String KEY_SAVEITEMBUTTON2 = "saveitem_button2";
@@ -116,6 +119,7 @@ public class Database {
 					+ KEY_ICONNAME + " TEXT NOT NULL, " + KEY_ICON + " INTEGER NOT NULL, " + KEY_BUTTON + " INTEGER NOT NULL, "
 					+ KEY_BANNER + " INTEGER NOT NULL);" 
 			);
+			
 			// Building table for Item Stats
 			db.execSQL(
 					"CREATE TABLE " + DATABASE_TABLE_ITEMSTATS + " (" + KEY_ITEMSTATSID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -141,8 +145,9 @@ public class Database {
 			);
 			// Building table for saving/editing builds
 			db.execSQL(
-					"CREATE TABLE " + DATABASE_TABLE_SAVEBUILD + " (" + KEY_SAVECHAMPNAME + " TEXT NOT NULL, " + KEY_SAVEITEMBUTTON0 + " INTEGER, " 
-					+ KEY_SAVEITEMBUTTON1 + "INTEGER, " + KEY_SAVEITEMBUTTON2 + "INTEGER, "
+					"CREATE TABLE " + DATABASE_TABLE_SAVEBUILD + " (" + KEY_SAVEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ KEY_SAVECHAMPNAME + " TEXT NOT NULL, " + KEY_SAVECHAMPICONID + " INTEGER NOT NULL, " + KEY_SAVEBUILDNAME + " TEXT NOT NULL, "
+					+ KEY_SAVEITEMBUTTON0 + " INTEGER, " + KEY_SAVEITEMBUTTON1 + "INTEGER, " + KEY_SAVEITEMBUTTON2 + "INTEGER, "
 					+ KEY_SAVEITEMBUTTON3 + "INTEGER, " + KEY_SAVEITEMBUTTON4 + "INTEGER, "
 					+ KEY_SAVEITEMBUTTON5 + "INTEGER);" 
 			);
@@ -166,6 +171,7 @@ public class Database {
 			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ITEMSTATS);
 			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ITEMICONS);
 			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_CHAMPSTATS);
+			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_SAVEBUILD);
 			onCreate(db);
 		}
 		
@@ -557,16 +563,27 @@ public class Database {
 		ourHelper.close();
 	}
 	
-	public void saveBuild(HashMap<String, Double> buildList, String champName) throws SQLiteException {
+	public void saveBuild(HashMap<String, Double> buildList, String champName, String buildName) throws SQLiteException {
 			ContentValues cv = new ContentValues();
+			int champId = getChampIdByName(champName);
 			cv.put(KEY_SAVECHAMPNAME, champName);
+			cv.put(KEY_SAVECHAMPICONID, champId);
+			cv.put(KEY_SAVEBUILDNAME, buildName);
 			if(buildList.get("item0") != null)
 				cv.put(KEY_SAVEITEMBUTTON0, buildList.get("item0"));
-			cv.put(KEY_SAVEITEMBUTTON0, 10);
+			//cv.put(KEY_SAVEITEMBUTTON0, 10);
 			ourDatabase.insert(DATABASE_TABLE_SAVEBUILD, null, cv);
 			cv.clear();
 		
 		
+	}
+	
+	public int getChampIdByName(String champName) {
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_CHAMP_ICONS + " WHERE " 
+		+ KEY_ICONNAME + " = ?", new String[]{champName});
+		int resultCol = c1.getColumnIndex(KEY_ICON);
+		c1.moveToFirst();
+		return c1.getInt(resultCol);
 	}
 	
 	public ArrayList<Integer> getChampButtons() throws SQLiteException{
@@ -845,9 +862,15 @@ public class Database {
 		 return null;
 	}
 	
+	public boolean buildNameExists(String buildName) {
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_SAVEBUILD 
+		+ " WHERE " + KEY_SAVEBUILDNAME + " = ?", new String[]{buildName});
+		return c1.moveToFirst();
+	}
+	
 	public String[] getSavedBuilds() {
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_SAVEBUILD , null);
-		int resultCol = c1.getColumnIndex(KEY_SAVECHAMPNAME);
+		int resultCol = c1.getColumnIndex(KEY_SAVEBUILDNAME);
 		String[] result = new String[c1.getCount()];
 		if(c1.moveToFirst()){
 			for(int i = 0; i < result.length; i++){

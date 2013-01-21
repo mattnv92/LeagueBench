@@ -453,26 +453,55 @@ public class Champ_Stats extends Activity{
 			popUp.setContentView(ll);
 			ll.addView(tvLvl, lllp);
 			
+			//Alert dialog for naming your build
+			
+			final AlertDialog saveD = new AlertDialog.Builder(this).create();
+			final EditText buildEt = new EditText(this);
+			saveD.setTitle("Name your Build");
+			saveD.setView(buildEt);
+			
+			//error dialog if edit text field is left blank
+			final AlertDialog saveBuildErr = new AlertDialog.Builder(this).create();
+			saveBuildErr.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+				
+				public void onClick(DialogInterface dialog, int which) {
+					saveBuildErr.dismiss();
+				}
+			});
+			saveBuildErr.setTitle("The build name you have chosen already exists!");
+			
+			saveD.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					String buildName = buildEt.getText().toString();
+					try{
+					db.openRead();
+					if(db.buildNameExists(buildName))
+						saveBuildErr.show();
+					else
+						db.saveBuild(saveBuild, champName, buildName);
+					}
+					catch(Exception e){
+						Dialog d = new Dialog(con);
+						d.setTitle("Uh Oh!");
+						TextView tv = new TextView(con);
+						tv.setText(e.getMessage());
+						d.setContentView(tv);
+						d.show();
+					}
+					finally{
+						db.close();
+					}
+					
+				}
+			});
+			
 			//listener used to update database about a saved build
 			OnClickListener save_listener = new OnClickListener() { 
 				@Override
 				public void onClick(View v) {
-					
-						try{
-							db.openRead();
-							db.saveBuild(saveBuild, champName);
-						}
-						catch(Exception e){
-							Dialog d = new Dialog(con);
-							d.setTitle("Uh Oh!");
-							TextView tv = new TextView(con);
-							tv.setText(e.getMessage());
-							d.setContentView(tv);
-							d.show();
-						}
-						finally{
-								db.close();
-						}
+						saveD.show();
 		            }
 				};
 			
