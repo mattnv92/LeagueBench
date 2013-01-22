@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -94,12 +95,12 @@ public class Database {
 	public static final String KEY_SAVECHAMPNAME = "savechamp_name";
 	public static final String KEY_SAVEBUILDNAME = "savebuild_name";
 	public static final String KEY_SAVECHAMPICONID = "savechamp_iconid";
-	public static final String KEY_SAVEITEMBUTTON0 = "saveitem_button0";
-	public static final String KEY_SAVEITEMBUTTON1 = "saveitem_button1";
-	public static final String KEY_SAVEITEMBUTTON2 = "saveitem_button2";
-	public static final String KEY_SAVEITEMBUTTON3 = "saveitem_button3";
-	public static final String KEY_SAVEITEMBUTTON4 = "saveitem_button4";
-	public static final String KEY_SAVEITEMBUTTON5 = "saveitem_button5";
+	public static final String KEY_SAVEITEM0 = "save_item0";
+	public static final String KEY_SAVEITEM1 = "save_item1";
+	public static final String KEY_SAVEITEM2 = "save_item2";
+	public static final String KEY_SAVEITEM3 = "save_item3";
+	public static final String KEY_SAVEITEM4 = "save_item4";
+	public static final String KEY_SAVEITEM5 = "save_item5";
 	
 	
 	private static class DbHelper extends SQLiteOpenHelper{
@@ -147,9 +148,8 @@ public class Database {
 			db.execSQL(
 					"CREATE TABLE " + DATABASE_TABLE_SAVEBUILD + " (" + KEY_SAVEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ KEY_SAVECHAMPNAME + " TEXT NOT NULL, " + KEY_SAVECHAMPICONID + " INTEGER NOT NULL, " + KEY_SAVEBUILDNAME + " TEXT NOT NULL, "
-					+ KEY_SAVEITEMBUTTON0 + " INTEGER, " + KEY_SAVEITEMBUTTON1 + "INTEGER, " + KEY_SAVEITEMBUTTON2 + "INTEGER, "
-					+ KEY_SAVEITEMBUTTON3 + "INTEGER, " + KEY_SAVEITEMBUTTON4 + "INTEGER, "
-					+ KEY_SAVEITEMBUTTON5 + "INTEGER);" 
+					+ KEY_SAVEITEM0 + " INTEGER, " + KEY_SAVEITEM1 + " INTEGER, " + KEY_SAVEITEM2 + " INTEGER, "
+					+ KEY_SAVEITEM3 + " INTEGER, " + KEY_SAVEITEM4 + " INTEGER, "	+ KEY_SAVEITEM5 + " INTEGER);" 
 			);
 			
 			try{
@@ -563,19 +563,33 @@ public class Database {
 		ourHelper.close();
 	}
 	
-	public void saveBuild(HashMap<String, Double> buildList, String champName, String buildName) throws SQLiteException {
+	public void saveBuild(HashMap<String, Integer> buildList, String champName, String buildName) throws SQLiteException {
 			ContentValues cv = new ContentValues();
 			int champId = getChampIdByName(champName);
 			cv.put(KEY_SAVECHAMPNAME, champName);
 			cv.put(KEY_SAVECHAMPICONID, champId);
 			cv.put(KEY_SAVEBUILDNAME, buildName);
 			if(buildList.get("item0") != null)
-				cv.put(KEY_SAVEITEMBUTTON0, buildList.get("item0"));
-			//cv.put(KEY_SAVEITEMBUTTON0, 10);
-			ourDatabase.insert(DATABASE_TABLE_SAVEBUILD, null, cv);
+				cv.put(KEY_SAVEITEM0, buildList.get("item0"));
+			if(buildList.get("item1") != null)
+				cv.put(KEY_SAVEITEM1, buildList.get("item1"));
+			if(buildList.get("item2") != null)
+				cv.put(KEY_SAVEITEM2, buildList.get("item2"));
+			if(buildList.get("item3") != null)
+				cv.put(KEY_SAVEITEM3, buildList.get("item3"));
+			if(buildList.get("item4") != null)
+				cv.put(KEY_SAVEITEM4, buildList.get("item4"));
+			if(buildList.get("item5") != null)
+				cv.put(KEY_SAVEITEM5, buildList.get("item5"));
+			
+			ourDatabase.insertOrThrow(DATABASE_TABLE_SAVEBUILD, null, cv);
 			cv.clear();
 		
-		
+	}
+	
+	public int numBuilds() {
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_SAVEBUILD, null);
+		return c1.getCount();
 	}
 	
 	public int getChampIdByName(String champName) {
@@ -866,6 +880,61 @@ public class Database {
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_SAVEBUILD 
 		+ " WHERE " + KEY_SAVEBUILDNAME + " = ?", new String[]{buildName});
 		return c1.moveToFirst();
+	}
+	
+	public String getChampNameByBuildName(String buildName) {
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_SAVEBUILD 
+		+ " WHERE " + KEY_SAVEBUILDNAME + " = ?", new String[]{buildName});
+		int resultCol = c1.getColumnIndex(KEY_SAVECHAMPNAME);
+		c1.moveToFirst();
+		return c1.getString(resultCol);
+	}
+	
+	public HashMap<String, Integer> getSavedItems(String buildName) {
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_SAVEBUILD 
+				+ " WHERE " + KEY_SAVEBUILDNAME + " = ?", new String[]{buildName});
+		int itemCol0 = c1.getColumnIndex(KEY_SAVEITEM0);
+		int itemCol1 = c1.getColumnIndex(KEY_SAVEITEM1);
+		int itemCol2 = c1.getColumnIndex(KEY_SAVEITEM2);
+		int itemCol3 = c1.getColumnIndex(KEY_SAVEITEM3);
+		int itemCol4 = c1.getColumnIndex(KEY_SAVEITEM4);
+		int itemCol5 = c1.getColumnIndex(KEY_SAVEITEM5);
+		
+		int i0;
+		int i1;
+		int i2;
+		int i3;
+		int i4;
+		int i5;
+		
+		c1.moveToFirst();
+		if(!c1.isNull(itemCol0)){
+			i0 = c1.getInt(itemCol0);
+			result.put("item0", i0);
+		}
+		if(!c1.isNull(itemCol1)){
+			i1 = c1.getInt(itemCol1);
+			result.put("item1", i1);
+		}
+		if(!c1.isNull(itemCol2)){
+			i2 = c1.getInt(itemCol2);
+			result.put("item2", i2);
+		}
+		if(!c1.isNull(itemCol3)){
+			i3 = c1.getInt(itemCol3);
+			result.put("item3", i3);
+		}
+		if(!c1.isNull(itemCol4)){
+			i4 = c1.getInt(itemCol4);
+			result.put("item4", i4);
+		}
+		if(!c1.isNull(itemCol5)){
+			i5 = c1.getInt(itemCol5);
+			result.put("item5", i5);
+		}
+
+		return result;
 	}
 	
 	public String[] getSavedBuilds() {

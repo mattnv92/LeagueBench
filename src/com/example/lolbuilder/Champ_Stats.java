@@ -61,7 +61,7 @@ public class Champ_Stats extends Activity{
 	
 	//champ stats list
 	private HashMap<String, Double> champStats = new HashMap<String, Double>();
-	private HashMap<String, Double> saveBuild = new HashMap<String, Double>();
+	private HashMap<String, Integer> saveBuild = new HashMap<String, Integer>();
 	
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +139,7 @@ public class Champ_Stats extends Activity{
 				else
 					msStat += itemSpeed;
 				
-				saveBuild.put("item0", (double)array[0]);
+				saveBuild.put("item0", array[0]);
 				
 			}
 			if(array[1] != 0){
@@ -159,6 +159,7 @@ public class Champ_Stats extends Activity{
 				}
 				else
 					msStat += itemSpeed;
+				saveBuild.put("item1", array[1]);
 			}
 			if(array[2] != 0){
 				itemName = db.getItemById(array[2]);
@@ -177,6 +178,7 @@ public class Champ_Stats extends Activity{
 				}
 				else
 					msStat += itemSpeed;
+				saveBuild.put("item2", array[2]);
 			}
 			if(array[3] != 0){
 				itemName = db.getItemById(array[3]);
@@ -195,6 +197,7 @@ public class Champ_Stats extends Activity{
 				}
 				else
 					msStat += itemSpeed;
+				saveBuild.put("item3", array[3]);
 			}
 			if(array[4] != 0){
 				itemName = db.getItemById(array[4]);
@@ -213,6 +216,7 @@ public class Champ_Stats extends Activity{
 				}
 				else
 					msStat += itemSpeed;
+				saveBuild.put("item4", array[4]);
 			}
 			if(array[5] != 0){
 				itemName = db.getItemById(array[5]);
@@ -231,6 +235,7 @@ public class Champ_Stats extends Activity{
 				}
 				else
 					msStat += itemSpeed;
+				saveBuild.put("item5", array[5]);
 			}
 			
 			
@@ -470,7 +475,7 @@ public class Champ_Stats extends Activity{
 			});
 			saveBuildErr.setTitle("The build name you have chosen already exists!");
 			
-			saveD.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
+			saveD.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -481,6 +486,9 @@ public class Champ_Stats extends Activity{
 						saveBuildErr.show();
 					else
 						db.saveBuild(saveBuild, champName, buildName);
+						Dialog d = new Dialog(con);
+						d.setTitle("" + db.numBuilds());
+						d.show();
 					}
 					catch(Exception e){
 						Dialog d = new Dialog(con);

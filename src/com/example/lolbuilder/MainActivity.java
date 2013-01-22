@@ -30,7 +30,6 @@ public class MainActivity extends Activity implements OnClickListener{
  					Intent lb_intent = new Intent(MainActivity.this, load_build);
  					startActivity(lb_intent);
  				} catch (ClassNotFoundException e) {
- 					// TODO Auto-generated catch block
  					e.printStackTrace();
  				}
  			}

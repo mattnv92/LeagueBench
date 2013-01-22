@@ -29,6 +29,12 @@ public class Item_List extends Activity {
 	final int NEXTBUTTON_ID = 104;
 	public int ITEM_SLOT_COUNT_INDEX = 0;
 	private String CHAMP_NAME;
+	private int item0Id = 0;
+	private int item1Id = 0;
+	private int item2Id = 0;
+	private int item3Id = 0;
+	private int item4Id = 0;
+	private int item5Id = 0;
 	
 	List<Button> item_slot_buffer = new ArrayList<Button>();
 	
@@ -38,6 +44,33 @@ public class Item_List extends Activity {
         Intent basket = getIntent();
         final int bid = basket.getExtras().getInt("champChosen");
         CHAMP_NAME = basket.getExtras().getString("champName");
+        if(basket.hasExtra("item0"))
+        	item0Id = basket.getExtras().getInt("item0");
+        if(basket.hasExtra("item1"))
+        	item1Id = basket.getExtras().getInt("item1");
+        if(basket.hasExtra("item2"))
+        	item2Id = basket.getExtras().getInt("item2");
+        if(basket.hasExtra("item3"))
+        	item3Id = basket.getExtras().getInt("item3");
+        if(basket.hasExtra("item4"))
+        	item4Id = basket.getExtras().getInt("item4");
+        if(basket.hasExtra("item5"))
+        	item5Id = basket.getExtras().getInt("item5");
+        
+        //Button b = new Button(this);
+        if(item0Id > 0)
+        	addItemToSlot(item0Id);
+        if(item1Id > 0)
+        	addItemToSlot(item1Id);
+        if(item2Id > 0)
+        	addItemToSlot(item2Id);
+        if(item3Id > 0)
+        	addItemToSlot(item3Id);
+        if(item4Id > 0)
+        	addItemToSlot(item4Id);
+        if(item5Id > 0)
+        	addItemToSlot(item5Id);
+        
         init_hsv();
         init_tabhost();
         init_nextButton(bid);
@@ -45,14 +78,14 @@ public class Item_List extends Activity {
         
 	}
         
-	public void addItemToSlot(View v){
+	public void addItemToSlot(int id){
         if(ITEM_SLOT_COUNT_INDEX < 6){	
         	final Button new_item = new Button(this);
         	final LinearLayout ll = (LinearLayout)findViewById(R.id.rlhsv);
         	LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        	new_item.setBackgroundResource(v.getId());
+        	new_item.setBackgroundResource(id);
         	new_item.setLayoutParams(lp);
-        	new_item.setId(v.getId());
+        	new_item.setId(id);
         	item_slot_buffer.add(new_item);
         	ll.addView(new_item);
         	
@@ -110,7 +143,7 @@ public class Item_List extends Activity {
         OnClickListener item_menu_listener = new OnClickListener() { 
 			@Override
 			public void onClick(View v) {
-				addItemToSlot(v);
+				addItemToSlot(v.getId());
 			}
 			
         };
