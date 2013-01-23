@@ -30,7 +30,6 @@ public class Database {
 	public static final String KEY_ICONROWID = "_id";
 	public static final String KEY_ICONNAME = "champ_name";
 	public static final String KEY_ICON = "champ_icon";
-	public static final String KEY_BUTTON = "champ_button";
 	public static final String KEY_BANNER = "champ_banner";
 	//Champ Icons Table
 	
@@ -117,8 +116,7 @@ public class Database {
 			// Building table for Champion Icons
 			db.execSQL(
 					"CREATE TABLE " + DATABASE_TABLE_CHAMP_ICONS + " (" + KEY_ICONROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ KEY_ICONNAME + " TEXT NOT NULL, " + KEY_ICON + " INTEGER NOT NULL, " + KEY_BUTTON + " INTEGER NOT NULL, "
-					+ KEY_BANNER + " INTEGER NOT NULL);" 
+					+ KEY_ICONNAME + " TEXT NOT NULL, " + KEY_ICON + " INTEGER NOT NULL, " + KEY_BANNER + " INTEGER NOT NULL);" 
 			);
 			
 			// Building table for Item Stats
@@ -181,150 +179,137 @@ public class Database {
 			//do i need all these inserts and clears????????????????????????? check later
 			cv.put(KEY_ICONNAME, "Ahri");
 			cv.put(KEY_ICON, R.drawable.ahributtonnormal);
-			cv.put(KEY_BUTTON, R.drawable.ahri_button);
 			cv.put(KEY_BANNER, R.drawable.ahri_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Akali");
 			cv.put(KEY_ICON, R.drawable.akalibuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.akali_button);
 			cv.put(KEY_BANNER, R.drawable.akali_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Alistar");
 			cv.put(KEY_ICON, R.drawable.alistarbuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.alistar_button);
 			cv.put(KEY_BANNER, R.drawable.alistar_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Amumu");
 			cv.put(KEY_ICON, R.drawable.amumubuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.amumu_button);
 			cv.put(KEY_BANNER, R.drawable.amumu_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Anivia");
 			cv.put(KEY_ICON, R.drawable.aniviabuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.anivia_button);
 			cv.put(KEY_BANNER, R.drawable.anivia_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Annie");
 			cv.put(KEY_ICON, R.drawable.anniebuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.annie_button);
 			cv.put(KEY_BANNER, R.drawable.annie_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Ashe");
 			cv.put(KEY_ICON, R.drawable.ashebuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.ashe_button);
 			cv.put(KEY_BANNER, R.drawable.ashe_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Blitzcrank");
 			cv.put(KEY_ICON, R.drawable.blitzcrankbuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.blitzcrank_button);
 			cv.put(KEY_BANNER, R.drawable.blitzcrank_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Brand");
 			cv.put(KEY_ICON, R.drawable.brandbuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.brand_button);
 			cv.put(KEY_BANNER, R.drawable.brand_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Caitlyn");
 			cv.put(KEY_ICON, R.drawable.caitlynbuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.caitlyn_button);
 			cv.put(KEY_BANNER, R.drawable.caitlyn_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Cassiopeia");
 			cv.put(KEY_ICON, R.drawable.cassiopeiabuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.cassiopeia_button);
 			cv.put(KEY_BANNER, R.drawable.cassiopeia_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Cho`Gath");
 			cv.put(KEY_ICON, R.drawable.chogathbuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.chogath_button);
 			cv.put(KEY_BANNER, R.drawable.chogath_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Corki");
 			cv.put(KEY_ICON, R.drawable.corkibuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.corki_button);
 			cv.put(KEY_BANNER, R.drawable.corki_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Darius");
 			cv.put(KEY_ICON, R.drawable.dariusbuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.darius_button);
 			cv.put(KEY_BANNER, R.drawable.darius_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Diana");
 			cv.put(KEY_ICON, R.drawable.dianabuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.diana_button);
 			cv.put(KEY_BANNER, R.drawable.diana_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Draven");
 			cv.put(KEY_ICON, R.drawable.dravenbuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.draven_button);
 			cv.put(KEY_BANNER, R.drawable.draven_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Dr. Mundo");
 			cv.put(KEY_ICON, R.drawable.drmundobuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.drmundo_button);
 			cv.put(KEY_BANNER, R.drawable.drmundo_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Elise");
 			cv.put(KEY_ICON, R.drawable.elisebuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.elise_button);
 			cv.put(KEY_BANNER, R.drawable.elise_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Evelynn");
 			cv.put(KEY_ICON, R.drawable.evelynnbuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.evelynn_button);
 			cv.put(KEY_BANNER, R.drawable.evelynn_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Ezreal");
 			cv.put(KEY_ICON, R.drawable.ezrealbuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.ezreal_button);
 			cv.put(KEY_BANNER, R.drawable.ezreal_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
 			cv.put(KEY_ICONNAME, "Fiddlesticks");
 			cv.put(KEY_ICON, R.drawable.fiddlesticksbuttonnormal);
-			cv.put(KEY_BUTTON, R.drawable.fiddlesticks_button);
 			cv.put(KEY_BANNER, R.drawable.fiddlesticks_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
+			
+			/*cv.put(KEY_ICONNAME, "Fiora");
+			cv.put(KEY_ICON, R.drawable.fiorabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.fiora_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();*/
+			
+			
 			
 		}
 		
@@ -602,8 +587,8 @@ public class Database {
 	
 	public ArrayList<Integer> getChampButtons() throws SQLiteException{
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		String[] columns = new String[] {KEY_ICONROWID, KEY_ICONNAME, KEY_ICON, KEY_BUTTON, KEY_BANNER};
-		Cursor c = ourDatabase.query(DATABASE_TABLE_CHAMP_ICONS, columns, KEY_BUTTON, null, null, null, KEY_ICONNAME);
+		String[] columns = new String[] {KEY_ICONROWID, KEY_ICONNAME, KEY_ICON, KEY_BANNER};
+		Cursor c = ourDatabase.query(DATABASE_TABLE_CHAMP_ICONS, columns, KEY_ICON, null, null, null, KEY_ICONNAME);
 		int iIcon = c.getColumnIndex(KEY_ICON);
 		for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
 			result.add(c.getInt(iIcon));
