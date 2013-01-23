@@ -968,4 +968,8 @@ public class Database {
 			cv.put(KEY_SAVEITEM5, buildList.get("item5"));
 		ourDatabase.update(DATABASE_TABLE_SAVEBUILD, cv, KEY_SAVEBUILDNAME + " = ?", new String[]{buildName});
 	}
+	
+	public void deleteBuild(String buildName) {
+		ourDatabase.delete(DATABASE_TABLE_SAVEBUILD, KEY_SAVEBUILDNAME + " = ?", new String[]{buildName});
+	}
 }
