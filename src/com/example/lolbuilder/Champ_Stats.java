@@ -37,7 +37,8 @@ public class Champ_Stats extends Activity{
 	private final int MOVEMENT_SPEED_TV_ID = 1008;
 	private final int LEVEL_BUTTON_ID = 1009;
 	private final int TEXT_SIZE = 20;
-	public String champName;
+	private String champName;
+	private String buildName;
 	public boolean click = true;
 	
 	//stats
@@ -467,28 +468,49 @@ public class Champ_Stats extends Activity{
 			
 			//error dialog if edit text field is left blank
 			final AlertDialog saveBuildErr = new AlertDialog.Builder(this).create();
-			saveBuildErr.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+			
+			saveBuildErr.setButton(Dialog.BUTTON_NEGATIVE, "No!", new DialogInterface.OnClickListener() {
 				
 				public void onClick(DialogInterface dialog, int which) {
 					saveBuildErr.dismiss();
 				}
 			});
-			saveBuildErr.setTitle("The build name you have chosen already exists!");
+			
+			saveBuildErr.setButton(Dialog.BUTTON_POSITIVE, "Yes!", new DialogInterface.OnClickListener() {
+				
+				public void onClick(DialogInterface dialog, int which) {
+					try{
+						db.openRead();
+						db.overWriteSavedBuild(saveBuild, champName, buildName);
+					}
+					catch(Exception e){
+						Dialog d = new Dialog(con);
+						d.setTitle("Uh Oh!");
+						TextView tv = new TextView(con);
+						tv.setText(e.getMessage());
+						d.setContentView(tv);
+						d.show();
+					}
+					finally{
+						db.close();
+					}
+				}
+			});
+			
+			
+			saveBuildErr.setTitle("Overwrite This Build?");
 			
 			saveD.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					String buildName = buildEt.getText().toString();
+					buildName = buildEt.getText().toString();
 					try{
 					db.openRead();
 					if(db.buildNameExists(buildName))
 						saveBuildErr.show();
 					else
 						db.saveBuild(saveBuild, champName, buildName);
-						Dialog d = new Dialog(con);
-						d.setTitle("" + db.numBuilds());
-						d.show();
 					}
 					catch(Exception e){
 						Dialog d = new Dialog(con);

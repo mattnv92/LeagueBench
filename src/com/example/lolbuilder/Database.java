@@ -726,7 +726,7 @@ public class Database {
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
 				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMAD + " > 0", null);
-		int iconCol = c1.getColumnIndex(KEY_ITEMBUTTON);
+		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
 		if(c1.moveToFirst()){
 			result.add(c1.getInt(iconCol));
 		}
@@ -947,5 +947,25 @@ public class Database {
 			}
 		}
 		return result;
+	}
+	
+	public void overWriteSavedBuild(HashMap<String, Integer> buildList, String champName, String buildName) {
+		ContentValues cv = new ContentValues();
+		int champId = getChampIdByName(champName);
+		cv.put(KEY_SAVECHAMPNAME, champName);
+		cv.put(KEY_SAVECHAMPICONID, champId);
+		if(buildList.get("item0") != null)
+			cv.put(KEY_SAVEITEM0, buildList.get("item0"));
+		if(buildList.get("item1") != null)
+			cv.put(KEY_SAVEITEM1, buildList.get("item1"));
+		if(buildList.get("item2") != null)
+			cv.put(KEY_SAVEITEM2, buildList.get("item2"));
+		if(buildList.get("item3") != null)
+			cv.put(KEY_SAVEITEM3, buildList.get("item3"));
+		if(buildList.get("item4") != null)
+			cv.put(KEY_SAVEITEM4, buildList.get("item4"));
+		if(buildList.get("item5") != null)
+			cv.put(KEY_SAVEITEM5, buildList.get("item5"));
+		ourDatabase.update(DATABASE_TABLE_SAVEBUILD, cv, KEY_SAVEBUILDNAME + " = ?", new String[]{buildName});
 	}
 }
