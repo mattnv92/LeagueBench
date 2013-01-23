@@ -105,7 +105,7 @@ public class Champ_List extends Activity implements OnItemClickListener{
 		            imageView = new ImageView(mContext);
 		            imageView.setLayoutParams(new GridView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-		            imageView.setPadding(8, 8, 8, 8);
+		            imageView.setPadding(5, 5, 5, 5);
 		        } else {
 		            imageView = (ImageView) convertView;
 		        }

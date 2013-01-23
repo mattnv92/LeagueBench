@@ -612,12 +612,10 @@ public class Database {
 	}
 	
 	public String champNameById(int id) {
-		String result;
 		Cursor c = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_CHAMP_ICONS + " WHERE " + KEY_ICON + " = " + id, null);
 		int resultCol = c.getColumnIndex(KEY_ICONNAME);
 		c.moveToFirst();
-		result = c.getString(resultCol);
-		return result;
+		return c.getString(resultCol);
 	}
 	
 	public ImageView button_to_banner(int buttonId) throws SQLiteException{
@@ -633,128 +631,131 @@ public class Database {
 		
 	}
 
-	public HashMap<String, Integer> getItemCategoryEND() throws SQLiteException {
+	public ArrayList<Integer> getItemCategoryEND() throws SQLiteException {
 		
-		HashMap<String, Integer> itemList = new HashMap<String, Integer>();
-		//ArrayList<String> items = new ArrayList<String>();
+		ArrayList<Integer> result = new ArrayList<Integer>();
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND (" 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMHP + " > 0" + " OR " + DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMP + " > 0"
 		+ " OR " + DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMPR + " > 0)", null);
-		int nameCol = c1.getColumnIndex(KEY_ITEMNAME);
-		int iconCol = c1.getColumnIndex(KEY_ITEMBUTTON);
+		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
 		if(c1.moveToFirst()){
-			itemList.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		while(c1.moveToNext()){
-			itemList.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		
-		return itemList;
+		return result;
 		
 		
 	}
 	
-	public HashMap<String, Integer> getItemCategoryAP() throws SQLiteException {
+	public ArrayList<Integer> getItemCategoryAP() throws SQLiteException {
 		
-		HashMap<String, Integer> itemList = new HashMap<String, Integer>();
+		ArrayList<Integer> result = new ArrayList<Integer>();
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMAP + " > 0" , null);
-		int nameCol = c1.getColumnIndex(KEY_ITEMNAME);
-		int iconCol = c1.getColumnIndex(KEY_ITEMBUTTON);
+		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
 		if(c1.moveToFirst()){
-			itemList.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		while(c1.moveToNext()){
-			itemList.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		
-		return itemList;
+		return result;
 		
 		
 	}
 	
-	public HashMap<String, Integer> getItemCategoryMS() throws SQLiteException {
+	public int getButtonById(int id) throws SQLiteException {
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMICONS + " WHERE " + KEY_ITEMICON + " = " + id, null);
+		int resultCol = c1.getColumnIndex(KEY_ITEMBUTTON);
+		if(c1.moveToFirst()){
+			return c1.getInt(resultCol);
+		}
+		else
+			return -1;
+	}
+	
+	public ArrayList<Integer> getItemCategoryMS() throws SQLiteException {
 		
-		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		ArrayList<Integer> result = new ArrayList<Integer>();
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND (" 
 				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMS + " > 0" + " OR " + DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMUNIQUEMS + " > 0)", null);
-		int nameCol = c1.getColumnIndex(KEY_ITEMNAME);
-		int iconCol = c1.getColumnIndex(KEY_ITEMBUTTON);
+		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
 		if(c1.moveToFirst()){
-			result.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		else
 			return null;
 		while(c1.moveToNext()){
-			result.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		
 		return result;
 	}
 	
-	public HashMap<String, Integer> getItemCategorySPEED() throws SQLiteException {
+	public ArrayList<Integer> getItemCategorySPEED() throws SQLiteException {
 		
-		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		ArrayList<Integer> result = new ArrayList<Integer>();
 		
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
 				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMS + " > 0", null);
-		int nameCol = c1.getColumnIndex(KEY_ITEMNAME);
-		int iconCol = c1.getColumnIndex(KEY_ITEMBUTTON);
+		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
 		if(c1.moveToFirst()){
-			result.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		else
 			return null;
 		while(c1.moveToNext()){
-			result.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		
 		return result;
 	}
 	
 	
-	public HashMap<String, Integer> getItemCategoryAD() throws SQLiteException {
+	public ArrayList<Integer> getItemCategoryAD() throws SQLiteException {
 		
-		HashMap<String, Integer> result = new HashMap<String, Integer>();
+		ArrayList<Integer> result = new ArrayList<Integer>();
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
 				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMAD + " > 0", null);
-		int nameCol = c1.getColumnIndex(KEY_ITEMNAME);
 		int iconCol = c1.getColumnIndex(KEY_ITEMBUTTON);
 		if(c1.moveToFirst()){
-			result.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		else
 			return null;
 		while(c1.moveToNext()){
-			result.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		
 		return result;
 	}
 	
-	public HashMap<String, Integer> getItemCategoryDefense() throws SQLiteException {
+	public ArrayList<Integer> getItemCategoryDefense() throws SQLiteException {
 		
-		HashMap<String, Integer> itemList = new HashMap<String, Integer>();
+		ArrayList<Integer> result = new ArrayList<Integer>();
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND (" 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMAR + " > 0" + " OR " + DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMR + " > 0)", null);
-		int nameCol = c1.getColumnIndex(KEY_ITEMNAME);
-		int iconCol = c1.getColumnIndex(KEY_ITEMBUTTON);
+		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
 		if(c1.moveToFirst()){
-			itemList.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		else
 			return null;
 		while(c1.moveToNext()){
-			itemList.put(c1.getString(nameCol), c1.getInt(iconCol));
+			result.add(c1.getInt(iconCol));
 		}
 		
-		return itemList;
+		return result;
 		
 		
 	}
@@ -843,12 +844,10 @@ public class Database {
 	}
 	
 	public String getItemById(int itemId) throws SQLiteException {
-		String result;
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMICONS + " WHERE " + KEY_ITEMBUTTON + " = " + itemId, null);
 		int resultCol = c1.getColumnIndex(KEY_ITEMICONNAME);
 		c1.moveToFirst();
-		result = c1.getString(resultCol);
-		return result;
+		return c1.getString(resultCol);
 	}
 	
 	public HashMap<String, Double> getItemStats(String itemName) throws SQLiteException {

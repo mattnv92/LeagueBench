@@ -41,7 +41,7 @@
         <activity
             android:name="com.example.lolbuilder.Item_List"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+          	android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.ITEMLIST" />
                 <category android:name="android.intent.category.DEFAULT" />

@@ -3,7 +3,7 @@
     
     <item
 	    android:state_pressed="true" 
-	    android:drawable="@drawable/dsbuttonpressed"> </item>
+	    android:drawable="@drawable/border"> </item>
     <item 
         android:drawable="@drawable/dsbuttonnormal"> </item>	
 

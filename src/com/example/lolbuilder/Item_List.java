@@ -7,11 +7,19 @@ import java.util.List;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,6 +43,17 @@ public class Item_List extends Activity {
 	private int item3Id = 0;
 	private int item4Id = 0;
 	private int item5Id = 0;
+	
+	//private HashMap<String, Integer> defenseList = new HashMap<String, Integer>();
+	private ArrayList<Integer> defenseIcons = new ArrayList<Integer>();
+	//private HashMap<String, Integer> adList = new HashMap<String, Integer>();
+	//private HashMap<String, Integer> apList = new HashMap<String, Integer>();
+	//private HashMap<String, Integer> endList = new HashMap<String, Integer>();
+	private ArrayList<Integer> endIcons = new ArrayList<Integer>();
+	private ArrayList<Integer> adIcons = new ArrayList<Integer>();
+	private ArrayList<Integer> apIcons = new ArrayList<Integer>();
+	private ArrayList<Integer> speedIcons = new ArrayList<Integer>();
+	//private HashMap<String, Integer> msList = new HashMap<String, Integer>();
 	
 	List<Button> item_slot_buffer = new ArrayList<Button>();
 	
@@ -106,27 +125,15 @@ public class Item_List extends Activity {
 	
 
 	public void init_tabhost(){
-		HashMap<String, Integer> defenseList = new HashMap<String, Integer>();
-		HashMap<String, Integer> adList = new HashMap<String, Integer>();
-		HashMap<String, Integer> apList = new HashMap<String, Integer>();
-		HashMap<String, Integer> endList = new HashMap<String, Integer>();
-		HashMap<String, Integer> msList = new HashMap<String, Integer>();
-		
-		
-		Button b;
-		int butPos;
-		ArrayList<Button> buttons = new ArrayList<Button>();
-		RelativeLayout rl;
-		RelativeLayout.LayoutParams lp;
 		
 		Database db = new Database(this);
         try{
         	db.openRead();
-        	defenseList = db.getItemCategoryDefense();
-        	adList = db.getItemCategoryAD();
-        	endList = db.getItemCategoryEND();
-        	msList = db.getItemCategoryMS();
-        	apList = db.getItemCategoryAP();
+        	//defenseIcons = db.getItemCategoryDefense();
+        	//adList = db.getItemCategoryAD();
+        	//endList = db.getItemCategoryEND();
+        	//msList = db.getItemCategoryMS();
+        	//apList = db.getItemCategoryAP();
         } 
         catch(Exception E){
         	Dialog d = new Dialog(this);
@@ -140,13 +147,6 @@ public class Item_List extends Activity {
         	db.close();
         }
         
-        OnClickListener item_menu_listener = new OnClickListener() { 
-			@Override
-			public void onClick(View v) {
-				addItemToSlot(v.getId());
-			}
-			
-        };
         
 		//add buttons
         TabHost th = (TabHost)findViewById(R.id.tabhost);
@@ -160,149 +160,128 @@ public class Item_List extends Activity {
         TabSpec ts = th.newTabSpec("item_tag");
         ts.setContent(R.id.defense);
         ts.setIndicator("DEF");
-        butPos = 0;
-        buttons = new ArrayList<Button>();
-        
-        for(Integer value : defenseList.values()){
-        	rl = (RelativeLayout)findViewById(R.id.defense);
-            lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        	b = new Button(this);
-        //	if(value != R.drawable.frozen_heart){
-        		
-        	b.setId(value);
-        	b.setBackgroundResource(value);
-        	buttons.add(b);
-        	if(butPos == 0){
-        		lp.addRule(RelativeLayout.RIGHT_OF, 0);
-        	}
-        	else if(butPos % 4 == 0)
-        		lp.addRule(RelativeLayout.BELOW, buttons.get(butPos - 4).getId());
-        	else{
-        		lp.addRule(RelativeLayout.RIGHT_OF, buttons.get(butPos - 1).getId());
-				if(butPos > 4)
-					lp.addRule(RelativeLayout.BELOW, buttons.get(butPos - 4).getId());
-        	}
-        	rl.addView(b, lp);
-        	b.setOnClickListener(item_menu_listener);
-        	butPos++;
-        	//}
-        }
-        
         th.addTab(ts);
+        
+		GridView gvDef = (GridView) findViewById(R.id.gvIlDef);
+				
+		gvDef.setOnItemClickListener(new OnItemClickListener() {
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	        	Database db = new Database(Item_List.this);
+	        	try{
+	        		db.openRead();
+	        		addItemToSlot(db.getButtonById(defenseIcons.get(position)));
+	        	}
+	        	catch(Exception e){
+	        		e.printStackTrace();
+	        	}
+	        	finally{
+	        		db.close();
+	        	}
+	        }
+	    });
+		
+		gvDef.setAdapter(new ImageAdapterDef(this));
+		//gvDef.setSelector(new ColorDrawable(Color.TRANSPARENT));
+
         ts = th.newTabSpec("item1_tag");
         ts.setContent(R.id.health);
         ts.setIndicator("END");
-        butPos = 0;
-        buttons = new ArrayList<Button>();
-        for(Integer value : endList.values()){
-        	rl = (RelativeLayout)findViewById(R.id.health);
-            lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        	b = new Button(this);
-        	b.setId(value);
-        	b.setBackgroundResource(value);
-        	buttons.add(b);
-        	if(butPos == 0){
-        		lp.addRule(RelativeLayout.RIGHT_OF, 0);
-        	}
-        	else if(butPos % 4 == 0)
-        		lp.addRule(RelativeLayout.BELOW, buttons.get(butPos - 4).getId());
-        	else{
-        		lp.addRule(RelativeLayout.RIGHT_OF, buttons.get(butPos - 1).getId());
-				if(butPos > 4)
-					lp.addRule(RelativeLayout.BELOW, buttons.get(butPos - 4).getId());
-        	}
-        	rl.addView(b, lp);
-        	b.setOnClickListener(item_menu_listener);
-        	butPos++;
-        }
-        
         th.addTab(ts);
+        
+        GridView gvEnd = (GridView) findViewById(R.id.gvIlEnd);
+		
+		gvEnd.setOnItemClickListener(new OnItemClickListener() {
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	        	Database db = new Database(Item_List.this);
+	        	try{
+	        		db.openRead();
+	        		addItemToSlot(db.getButtonById(endIcons.get(position)));
+	        	}
+	        	catch(Exception e){
+	        		e.printStackTrace();
+	        	}
+	        	finally{
+	        		db.close();
+	        	}
+	        }
+	    });
+		
+		gvEnd.setAdapter(new ImageAdapterEnd(this));
+        
         ts = th.newTabSpec("item2_tag");
         ts.setContent(R.id.AD);
         ts.setIndicator("AD");
-        butPos = 0;
-        buttons = new ArrayList<Button>();
-        for(Integer value : adList.values()){
-        	rl = (RelativeLayout)findViewById(R.id.AD);
-            lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        	b = new Button(this);
-        	b.setId(value);
-        	b.setBackgroundResource(value);
-        	buttons.add(b);
-        	if(butPos == 0){
-        		lp.addRule(RelativeLayout.RIGHT_OF, 0);
-        	}
-        	else if(butPos % 4 == 0)
-        		lp.addRule(RelativeLayout.BELOW, buttons.get(butPos - 4).getId());
-        	else{
-        		lp.addRule(RelativeLayout.RIGHT_OF, buttons.get(butPos - 1).getId());
-				if(butPos > 4)
-					lp.addRule(RelativeLayout.BELOW, buttons.get(butPos - 4).getId());
-        	}
-        	rl.addView(b, lp);
-        	b.setOnClickListener(item_menu_listener);
-        	butPos++;
-        }
-        
         th.addTab(ts);
+        
+        GridView gvAd = (GridView) findViewById(R.id.gvIlAd);
+		
+		gvAd.setOnItemClickListener(new OnItemClickListener() {
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	        	Database db = new Database(Item_List.this);
+	        	try{
+	        		db.openRead();
+	        		addItemToSlot(db.getButtonById(adIcons.get(position)));
+	        	}
+	        	catch(Exception e){
+	        		e.printStackTrace();
+	        	}
+	        	finally{
+	        		db.close();
+	        	}
+	        }
+	    });
+        
+		gvAd.setAdapter(new ImageAdapterAd(this));
+
         ts = th.newTabSpec("item3_tag");
         ts.setContent(R.id.AP);
         ts.setIndicator("AP");
         th.addTab(ts);
-        th.setId(TABHOST_ID);
-        butPos = 0;
-        buttons = new ArrayList<Button>();
-        for(Integer value : apList.values()){
-        	rl = (RelativeLayout)findViewById(R.id.AP);
-            lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        	b = new Button(this);
-        	b.setId(value);
-        	b.setBackgroundResource(value);
-        	buttons.add(b);
-        	if(butPos == 0){
-        		lp.addRule(RelativeLayout.RIGHT_OF, 0);
-        	}
-        	else if(butPos % 4 == 0)
-        		lp.addRule(RelativeLayout.BELOW, buttons.get(butPos - 4).getId());
-        	else{
-        		lp.addRule(RelativeLayout.RIGHT_OF, buttons.get(butPos - 1).getId());
-				if(butPos > 4)
-					lp.addRule(RelativeLayout.BELOW, buttons.get(butPos - 4).getId());
-        	}
-        	rl.addView(b, lp);
-        	b.setOnClickListener(item_menu_listener);
-        	butPos++;
-        }
+        
+        GridView gvAp = (GridView) findViewById(R.id.gvIlAp);
+		
+		gvAp.setOnItemClickListener(new OnItemClickListener() {
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	        	Database db = new Database(Item_List.this);
+	        	try{
+	        		db.openRead();
+	        		addItemToSlot(db.getButtonById(apIcons.get(position)));
+	        	}
+	        	catch(Exception e){
+	        		e.printStackTrace();
+	        	}
+	        	finally{
+	        		db.close();
+	        	}
+	        }
+	    });
+        
+		gvAp.setAdapter(new ImageAdapterAp(this));
         
         ts = th.newTabSpec("item4_tag");
         ts.setContent(R.id.MS);
         ts.setIndicator("SPEED");
-        butPos = 0;
-        buttons = new ArrayList<Button>();
-        for(Integer value : msList.values()){
-        	rl = (RelativeLayout)findViewById(R.id.MS);
-            lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        	b = new Button(this);
-        	b.setId(value);
-        	b.setBackgroundResource(value);
-        	buttons.add(b);
-        	if(butPos == 0){
-        		lp.addRule(RelativeLayout.RIGHT_OF, 0);
-        	}
-        	else if(butPos % 4 == 0)
-        		lp.addRule(RelativeLayout.BELOW, buttons.get(butPos - 4).getId());
-        	else{
-        		lp.addRule(RelativeLayout.RIGHT_OF, buttons.get(butPos - 1).getId());
-				if(butPos > 4)
-					lp.addRule(RelativeLayout.BELOW, buttons.get(butPos - 4).getId());
-        	}
-        	rl.addView(b, lp);
-        	b.setOnClickListener(item_menu_listener);
-        	butPos++;
-        }
         th.addTab(ts);
-        //set buttons
-        //doran_shield.setOnClickListener(item_menu_listener);
+        
+        GridView gvSpeed = (GridView) findViewById(R.id.gvIlSpeed);
+		
+		gvSpeed.setOnItemClickListener(new OnItemClickListener() {
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	        	Database db = new Database(Item_List.this);
+	        	try{
+	        		db.openRead();
+	        		addItemToSlot(db.getButtonById(speedIcons.get(position)));
+	        	}
+	        	catch(Exception e){
+	        		e.printStackTrace();
+	        	}
+	        	finally{
+	        		db.close();
+	        	}
+	        }
+	    });
+        
+		gvSpeed.setAdapter(new ImageAdapterSpeed(this));
 		
 	}
 	
@@ -361,7 +340,6 @@ public class Item_List extends Activity {
 					cs_intent.putExtra("item5", array[5]);
 					startActivity(cs_intent);
 				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -369,7 +347,275 @@ public class Item_List extends Activity {
 		});
 	}
 
+	public class ImageAdapterDef extends BaseAdapter {
+	    private Context mContext;
+	    Database db;
+	    
+	    public ImageAdapterDef(Context c) {
+	        mContext = c;
+	        db = new Database(c);
+	        populate();
+	    }
 
+	    public int getCount() {
+	        return defenseIcons.size();
+	    }
+
+	    public Object getItem(int position) {
+	        return null;
+	    }
+
+	    public long getItemId(int position) {
+	        return defenseIcons.get(position);
+	    }
+	    
+	    public void populate() {
+	    	try{
+	    		db.openRead();
+	    		defenseIcons = db.getItemCategoryDefense();
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	finally{
+	    		db.close();
+	    	}
+	    }
+
+	    // create a new ImageView for each item referenced by the Adapter
+	    public View getView(int position, View convertView, ViewGroup parent) {
+	        ImageView imageView;
+	        if (convertView == null) {  // if it's not recycled, initialize some attributes
+	            imageView = new ImageView(mContext);
+	            imageView.setLayoutParams(new GridView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+	            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+	            imageView.setPadding(8, 8, 8, 8);
+	        } else {
+	            imageView = (ImageView) convertView;
+	        }
+
+	        imageView.setImageResource(defenseIcons.get(position));
+	        return imageView;
+	    }
+
+	   
+	}
+	
+	public class ImageAdapterEnd extends BaseAdapter {
+	    private Context mContext;
+	    Database db;
+	    
+	    public ImageAdapterEnd(Context c) {
+	        mContext = c;
+	        db = new Database(c);
+	        populate();
+	    }
+
+	    public int getCount() {
+	        return endIcons.size();
+	    }
+
+	    public Object getItem(int position) {
+	        return null;
+	    }
+
+	    public long getItemId(int position) {
+	        return endIcons.get(position);
+	    }
+	    
+	    public void populate() {
+	    	try{
+	    		db.openRead();
+	    		endIcons = db.getItemCategoryEND();
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	finally{
+	    		db.close();
+	    	}
+	    }
+
+	    // create a new ImageView for each item referenced by the Adapter
+	    public View getView(int position, View convertView, ViewGroup parent) {
+	        ImageView imageView;
+	        if (convertView == null) {  // if it's not recycled, initialize some attributes
+	            imageView = new ImageView(mContext);
+	            imageView.setLayoutParams(new GridView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+	            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+	            imageView.setPadding(8, 8, 8, 8);
+	        } else {
+	            imageView = (ImageView) convertView;
+	        }
+
+	        imageView.setImageResource(endIcons.get(position));
+	        return imageView;
+	    }
+
+	   
+	}
+	
+	public class ImageAdapterAd extends BaseAdapter {
+	    private Context mContext;
+	    Database db;
+	    
+	    public ImageAdapterAd(Context c) {
+	        mContext = c;
+	        db = new Database(c);
+	        populate();
+	    }
+
+	    public int getCount() {
+	        return adIcons.size();
+	    }
+
+	    public Object getItem(int position) {
+	        return null;
+	    }
+
+	    public long getItemId(int position) {
+	        return adIcons.get(position);
+	    }
+	    
+	    public void populate() {
+	    	try{
+	    		db.openRead();
+	    		adIcons = db.getItemCategoryAD();
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	finally{
+	    		db.close();
+	    	}
+	    }
+
+	    // create a new ImageView for each item referenced by the Adapter
+	    public View getView(int position, View convertView, ViewGroup parent) {
+	        ImageView imageView;
+	        if (convertView == null) {  // if it's not recycled, initialize some attributes
+	            imageView = new ImageView(mContext);
+	            imageView.setLayoutParams(new GridView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+	            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+	            imageView.setPadding(8, 8, 8, 8);
+	        } else {
+	            imageView = (ImageView) convertView;
+	        }
+
+	        imageView.setImageResource(adIcons.get(position));
+	        return imageView;
+	    }
+
+	   
+	}
+	
+	public class ImageAdapterAp extends BaseAdapter {
+	    private Context mContext;
+	    Database db;
+	    
+	    public ImageAdapterAp(Context c) {
+	        mContext = c;
+	        db = new Database(c);
+	        populate();
+	    }
+
+	    public int getCount() {
+	        return apIcons.size();
+	    }
+
+	    public Object getItem(int position) {
+	        return null;
+	    }
+
+	    public long getItemId(int position) {
+	        return apIcons.get(position);
+	    }
+	    
+	    public void populate() {
+	    	try{
+	    		db.openRead();
+	    		apIcons = db.getItemCategoryAP();
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	finally{
+	    		db.close();
+	    	}
+	    }
+
+	    // create a new ImageView for each item referenced by the Adapter
+	    public View getView(int position, View convertView, ViewGroup parent) {
+	        ImageView imageView;
+	        if (convertView == null) {  // if it's not recycled, initialize some attributes
+	            imageView = new ImageView(mContext);
+	            imageView.setLayoutParams(new GridView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+	            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+	            imageView.setPadding(8, 8, 8, 8);
+	        } else {
+	            imageView = (ImageView) convertView;
+	        }
+
+	        imageView.setImageResource(apIcons.get(position));
+	        return imageView;
+	    }
+
+	   
+	}
+	
+	public class ImageAdapterSpeed extends BaseAdapter {
+	    private Context mContext;
+	    Database db;
+	    
+	    public ImageAdapterSpeed(Context c) {
+	        mContext = c;
+	        db = new Database(c);
+	        populate();
+	    }
+
+	    public int getCount() {
+	        return speedIcons.size();
+	    }
+
+	    public Object getItem(int position) {
+	        return null;
+	    }
+
+	    public long getItemId(int position) {
+	        return speedIcons.get(position);
+	    }
+	    
+	    public void populate() {
+	    	try{
+	    		db.openRead();
+	    		speedIcons = db.getItemCategoryMS();
+	    	}
+	    	catch(Exception e){
+	    		e.printStackTrace();
+	    	}
+	    	finally{
+	    		db.close();
+	    	}
+	    }
+
+	    // create a new ImageView for each item referenced by the Adapter
+	    public View getView(int position, View convertView, ViewGroup parent) {
+	        ImageView imageView;
+	        if (convertView == null) {  // if it's not recycled, initialize some attributes
+	            imageView = new ImageView(mContext);
+	            imageView.setLayoutParams(new GridView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+	            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+	            imageView.setPadding(8, 8, 8, 8);
+	        } else {
+	            imageView = (ImageView) convertView;
+	        }
+
+	        imageView.setImageResource(speedIcons.get(position));
+	        return imageView;
+	    }
+
+	   
+	}
 	
 
 }

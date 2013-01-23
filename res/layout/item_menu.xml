@@ -36,7 +36,20 @@
                     android1:id="@+id/defense"
                     android1:layout_width="match_parent"
                     android1:layout_height="match_parent"
-                    android1:paddingLeft = "15dp">
+                   	>
+                    
+                    <GridView xmlns:android="http://schemas.android.com/apk/res/android" 
+					    android:id="@+id/gvIlDef"
+					    android:layout_width="fill_parent" 
+					    android:layout_height="fill_parent"
+					    android:columnWidth="80dp"
+					    android:numColumns="auto_fit"
+					    android:verticalSpacing="5dp"
+					    android:horizontalSpacing="5dp"
+					    android:stretchMode="columnWidth"
+					    android:gravity="center"
+					/>
+                    
                     
                 </RelativeLayout>
 
@@ -44,28 +57,80 @@
                     android1:id="@+id/health"
                     android1:layout_width="match_parent"
                     android1:layout_height="match_parent"
-                    android1:paddingLeft = "15dp" >
+                     >
+                    
+                    <GridView xmlns:android="http://schemas.android.com/apk/res/android" 
+					    android:id="@+id/gvIlEnd"
+					    android:layout_width="fill_parent" 
+					    android:layout_height="fill_parent"
+					    android:columnWidth="80dp"
+					    android:numColumns="auto_fit"
+					    android:verticalSpacing="5dp"
+					    android:horizontalSpacing="5dp"
+					    android:stretchMode="columnWidth"
+					    android:gravity="center"
+					/>
+                    
                 </RelativeLayout>
 
                 <RelativeLayout
                     android1:id="@+id/AD"
                     android1:layout_width="match_parent"
                     android1:layout_height="match_parent"
-                    android1:paddingLeft = "15dp" >
+                     >
+                    
+                     <GridView xmlns:android="http://schemas.android.com/apk/res/android" 
+					    android:id="@+id/gvIlAd"
+					    android:layout_width="fill_parent" 
+					    android:layout_height="fill_parent"
+					    android:columnWidth="80dp"
+					    android:numColumns="auto_fit"
+					    android:verticalSpacing="5dp"
+					    android:horizontalSpacing="5dp"
+					    android:stretchMode="columnWidth"
+					    android:gravity="center"
+					/>
+                    
                 </RelativeLayout>
                 
                 <RelativeLayout
                     android1:id="@+id/AP"
                     android1:layout_width="match_parent"
                     android1:layout_height="match_parent"
-                    android1:paddingLeft = "15dp" >
+                     >
+                    
+                     <GridView xmlns:android="http://schemas.android.com/apk/res/android" 
+					    android:id="@+id/gvIlAp"
+					    android:layout_width="fill_parent" 
+					    android:layout_height="fill_parent"
+					    android:columnWidth="80dp"
+					    android:numColumns="auto_fit"
+					    android:verticalSpacing="5dp"
+					    android:horizontalSpacing="5dp"
+					    android:stretchMode="columnWidth"
+					    android:gravity="center"
+					/>
+                    
                 </RelativeLayout>
                 
                 <RelativeLayout
                     android1:id="@+id/MS"
                     android1:layout_width="match_parent"
                     android1:layout_height="match_parent"
-                    android1:paddingLeft = "15dp" >
+                     >
+                    
+                     <GridView xmlns:android="http://schemas.android.com/apk/res/android" 
+					    android:id="@+id/gvIlSpeed"
+					    android:layout_width="fill_parent" 
+					    android:layout_height="fill_parent"
+					    android:columnWidth="80dp"
+					    android:numColumns="auto_fit"
+					    android:verticalSpacing="5dp"
+					    android:horizontalSpacing="5dp"
+					    android:stretchMode="columnWidth"
+					    android:gravity="center"
+					/>
+                    
                 </RelativeLayout>
                 
             </FrameLayout>
@@ -93,6 +158,7 @@
        android1:text="thisisabutton"
   
        />
-
+     
+    
     
 </RelativeLayout>
