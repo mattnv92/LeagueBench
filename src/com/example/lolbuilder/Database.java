@@ -303,12 +303,539 @@ public class Database {
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
 			cv.clear();
 			
-			/*cv.put(KEY_ICONNAME, "Fiora");
+			cv.put(KEY_ICONNAME, "Fiora");
 			cv.put(KEY_ICON, R.drawable.fiorabuttonnormal);
 			cv.put(KEY_BANNER, R.drawable.fiora_banner);
 			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
-			cv.clear();*/
+			cv.clear();
 			
+			cv.put(KEY_ICONNAME, "Fizz");
+			cv.put(KEY_ICON, R.drawable.fizzbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.fizz_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Galio");
+			cv.put(KEY_ICON, R.drawable.galiobuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.galio_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Gangplank");
+			cv.put(KEY_ICON, R.drawable.gangplankbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.gangplank_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Garen");
+			cv.put(KEY_ICON, R.drawable.garenbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.garen_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Gragas");
+			cv.put(KEY_ICON, R.drawable.gragasbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.gragas_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Graves");
+			cv.put(KEY_ICON, R.drawable.gravesbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.graves_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Hecarim");
+			cv.put(KEY_ICON, R.drawable.hecarimbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.hecarim_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Heimerdinger");
+			cv.put(KEY_ICON, R.drawable.heimerdingerbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.heimerdinger_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Irelia");
+			cv.put(KEY_ICON, R.drawable.ireliabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.irelia_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Janna");
+			cv.put(KEY_ICON, R.drawable.jannabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.janna_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Jarvan IV");
+			cv.put(KEY_ICON, R.drawable.jarvanbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.jarvan_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Jax");
+			cv.put(KEY_ICON, R.drawable.jaxbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.jax_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Jayce");
+			cv.put(KEY_ICON, R.drawable.jaycebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.jayce_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Karma");
+			cv.put(KEY_ICON, R.drawable.karmabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.karma_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Karthus");
+			cv.put(KEY_ICON, R.drawable.karthusbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.karthus_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Kassadin");
+			cv.put(KEY_ICON, R.drawable.kassadinbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.kassadin_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Katarina");
+			cv.put(KEY_ICON, R.drawable.katarinabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.katarina_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Kayle");
+			cv.put(KEY_ICON, R.drawable.kaylebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.kayle_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Kennen");
+			cv.put(KEY_ICON, R.drawable.kennenbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.kennen_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Kha`Zix");
+			cv.put(KEY_ICON, R.drawable.khazixbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.khazix_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Kog`Maw");
+			cv.put(KEY_ICON, R.drawable.kogmawbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.kogmaw_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "LeBlanc");
+			cv.put(KEY_ICON, R.drawable.leblancbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.leblanc_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Lee Sin");
+			cv.put(KEY_ICON, R.drawable.leesinbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.leesin_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Leona");
+			cv.put(KEY_ICON, R.drawable.leonabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.leona_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Lulu");
+			cv.put(KEY_ICON, R.drawable.lulubuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.lulu_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Lux");
+			cv.put(KEY_ICON, R.drawable.luxbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.lux_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Malphite");
+			cv.put(KEY_ICON, R.drawable.malphitebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.malphite_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Malzahar");
+			cv.put(KEY_ICON, R.drawable.malzaharbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.malzahar_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Maokai");
+			cv.put(KEY_ICON, R.drawable.maokaibuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.maokai_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Master Yi");
+			cv.put(KEY_ICON, R.drawable.masteryibuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.masteryi_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Miss Fortune");
+			cv.put(KEY_ICON, R.drawable.missfortunebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.missfortune_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Mordekaiser");
+			cv.put(KEY_ICON, R.drawable.mordekaiserbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.mordekaiser_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Morgana");
+			cv.put(KEY_ICON, R.drawable.morganabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.morgana_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Nami");
+			cv.put(KEY_ICON, R.drawable.namibuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.nami_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Nasus");
+			cv.put(KEY_ICON, R.drawable.nasusbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.nasus_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Nautilus");
+			cv.put(KEY_ICON, R.drawable.nautilusbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.nautilus_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Nidalee");
+			cv.put(KEY_ICON, R.drawable.nidaleebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.nidalee_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Nocturne");
+			cv.put(KEY_ICON, R.drawable.nocturnebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.nocturne_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Nunu");
+			cv.put(KEY_ICON, R.drawable.nunubuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.nunu_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Olaf");
+			cv.put(KEY_ICON, R.drawable.olafbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.olaf_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Orianna");
+			cv.put(KEY_ICON, R.drawable.oriannabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.orianna_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Pantheon");
+			cv.put(KEY_ICON, R.drawable.pantheonbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.pantheon_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Poppy");
+			cv.put(KEY_ICON, R.drawable.poppybuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.poppy_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Rammus");
+			cv.put(KEY_ICON, R.drawable.rammusbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.rammus_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Renekton");
+			cv.put(KEY_ICON, R.drawable.renektonbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.renekton_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Rengar");
+			cv.put(KEY_ICON, R.drawable.rengarbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.rengar_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Riven");
+			cv.put(KEY_ICON, R.drawable.rivenbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.riven_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Rumble");
+			cv.put(KEY_ICON, R.drawable.rumblebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.rumble_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Ryze");
+			cv.put(KEY_ICON, R.drawable.ryzebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.ryze_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Sejuani");
+			cv.put(KEY_ICON, R.drawable.sejuanibuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.sejuani_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Shaco");
+			cv.put(KEY_ICON, R.drawable.shacobuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.shaco_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Shen");
+			cv.put(KEY_ICON, R.drawable.shenbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.shen_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Singed");
+			cv.put(KEY_ICON, R.drawable.singedbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.singed_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Shyvana");
+			cv.put(KEY_ICON, R.drawable.shyvanabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.shyvana_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Sion");
+			cv.put(KEY_ICON, R.drawable.sionbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.sion_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Sivir");
+			cv.put(KEY_ICON, R.drawable.sivirbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.sivir_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Skarner");
+			cv.put(KEY_ICON, R.drawable.skarnerbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.skarner_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Sona");
+			cv.put(KEY_ICON, R.drawable.sonabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.sona_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Soraka");
+			cv.put(KEY_ICON, R.drawable.sorakabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.soraka_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Swain");
+			cv.put(KEY_ICON, R.drawable.swainbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.swain_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Syndra");
+			cv.put(KEY_ICON, R.drawable.syndrabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.syndra_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Talon");
+			cv.put(KEY_ICON, R.drawable.talonbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.talon_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Taric");
+			cv.put(KEY_ICON, R.drawable.taricbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.taric_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Teemo");
+			cv.put(KEY_ICON, R.drawable.teemobuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.teemo_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Thresh");
+			cv.put(KEY_ICON, R.drawable.threshbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.thresh_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Tristana");
+			cv.put(KEY_ICON, R.drawable.tristanabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.tristana_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Trundle");
+			cv.put(KEY_ICON, R.drawable.trundlebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.trundle_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Tryndamere");
+			cv.put(KEY_ICON, R.drawable.tryndamerebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.tryndamere_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Twisted Fate");
+			cv.put(KEY_ICON, R.drawable.twistedfatebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.twistedfate_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Twitch");
+			cv.put(KEY_ICON, R.drawable.twitchbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.twitch_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Udyr");
+			cv.put(KEY_ICON, R.drawable.udyrbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.udyr_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Urgot");
+			cv.put(KEY_ICON, R.drawable.urgotbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.urgot_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Varus");
+			cv.put(KEY_ICON, R.drawable.varusbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.varus_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Vayne");
+			cv.put(KEY_ICON, R.drawable.vaynebuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.vayne_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Veigar");
+			cv.put(KEY_ICON, R.drawable.veigarbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.veigar_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Vi");
+			cv.put(KEY_ICON, R.drawable.vibuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.vi_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Viktor");
+			cv.put(KEY_ICON, R.drawable.viktorbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.viktor_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Vladimir");
+			cv.put(KEY_ICON, R.drawable.vladimirbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.vladimir_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Volibear");
+			cv.put(KEY_ICON, R.drawable.volibearbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.volibear_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Warwick");
+			cv.put(KEY_ICON, R.drawable.warwickbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.warwick_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Wukong");
+			cv.put(KEY_ICON, R.drawable.wukongbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.wukong_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Xerath");
+			cv.put(KEY_ICON, R.drawable.xerathbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.xerath_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Xin Zhao");
+			cv.put(KEY_ICON, R.drawable.xinzhaobuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.xinzhao_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Yorick");
+			cv.put(KEY_ICON, R.drawable.yorickbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.yorick_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Zed");
+			cv.put(KEY_ICON, R.drawable.zedbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.zed_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Ziggs");
+			cv.put(KEY_ICON, R.drawable.ziggsbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.ziggs_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Zilean");
+			cv.put(KEY_ICON, R.drawable.zileanbuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.zilean_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ICONNAME, "Zyra");
+			cv.put(KEY_ICON, R.drawable.zyrabuttonnormal);
+			cv.put(KEY_BANNER, R.drawable.zyra_banner);
+			db.insertOrThrow(DATABASE_TABLE_CHAMP_ICONS, null, cv);
+			cv.clear();
 			
 			
 		}
