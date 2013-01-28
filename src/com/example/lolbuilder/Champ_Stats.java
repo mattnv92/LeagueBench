@@ -381,11 +381,10 @@ public class Champ_Stats extends Activity{
 			msTv.setTextSize(TEXT_SIZE);
 			rl.addView(msTv);
 			
-			final RelativeLayout rel = (RelativeLayout)findViewById(R.id.csrl);
-			RelativeLayout.LayoutParams lpl = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-			Button b = new Button(this);
+			final LinearLayout rel = (LinearLayout)findViewById(R.id.csrl);
+			LinearLayout.LayoutParams lpl = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			Button b = (Button)rel.findViewById(R.id.levelbut);
 			final PopupWindow popUp = new PopupWindow(this);
-			b.setText("Level");
 			
 			//level up dialog
 			final AlertDialog d = new AlertDialog.Builder(this).create();
@@ -446,10 +445,10 @@ public class Champ_Stats extends Activity{
 				
 			
 			b.setOnClickListener(b_listener);
-			lpl.addRule(RelativeLayout.BELOW, R.id.champ_stats_sv);
+			//lpl.addRule(RelativeLayout.BELOW, R.id.champ_stats_sv);
 			b.setLayoutParams(lpl);
 			b.setId(LEVEL_BUTTON_ID);
-			rel.addView(b);
+			//rel.addView(b);
 			
 			LinearLayout ll = new LinearLayout(this);
 			LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1);
@@ -536,13 +535,13 @@ public class Champ_Stats extends Activity{
 				};
 			
 			//save button
-			lpl = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-			lpl.addRule(RelativeLayout.BELOW, LEVEL_BUTTON_ID);
-			Button save = new Button(this);
+			//lpl = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			//lpl.addRule(RelativeLayout.BELOW, LEVEL_BUTTON_ID);
+			/*Button save = new Button(this);
 			save.setText("Save");
 			save.setOnClickListener(save_listener);
 			rel.addView(save, lpl);
-			
+			*/
 			
 		}
 		catch(Exception e){

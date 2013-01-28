@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/hhh"
+    android:background="#000000"
      >
      
     <RelativeLayout
@@ -36,13 +37,13 @@
         android:padding="20dip"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:background="#18FF0000"
-        android:textColor="#AA000000"
-        app:footerColor="#FFAA2222"
+        android:background="#EBEBEB"
+        android:textColor="#000000"
+        app:footerColor="#AA1111"
         app:footerLineHeight="1dp"
         app:footerIndicatorHeight="3dp"
         app:footerIndicatorStyle="underline"
-        app:selectedColor="#FF000000"
+        app:selectedColor="#000000"
         app:selectedBold="true"
         />
     <android.support.v4.view.ViewPager
@@ -57,7 +58,7 @@
        android:id="@+id/nextbut"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text="thisisabutton"
+       android:text="Next"
   
        />
 

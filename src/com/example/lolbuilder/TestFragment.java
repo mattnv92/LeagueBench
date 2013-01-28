@@ -7,6 +7,7 @@ import com.example.lolbuilder.Item_List.ImageAdapterAd;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -63,7 +64,7 @@ public final class TestFragment extends Fragment {
     		View v = inflater.inflate(R.layout.gv_hp_inflate, ll, false);
         	ll.addView(v);
 	    	GridView gvHp = (GridView) v.findViewById(R.id.gvHp);
-			
+	    	
 			gvHp.setOnItemClickListener(new OnItemClickListener() {
 		        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		        	Database db = new Database(getActivity());
@@ -546,7 +547,7 @@ public final class TestFragment extends Fragment {
 		    }
 
 		    public long getItemId(int position) {
-		        return hpRIcons.get(position);
+		        return apIcons.get(position);
 		    }
 		    
 		    public void populate() {
