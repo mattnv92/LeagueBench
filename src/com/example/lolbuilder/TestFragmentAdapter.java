@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.viewpagerindicator.IconPagerAdapter;
 
 class TestFragmentAdapter extends FragmentPagerAdapter implements IconPagerAdapter {
-    protected static final String[] CONTENT = new String[] { "Health", "Health R", "Mana", "Mana R", "Attack D", "Ability P", "Armor", "Magic R" };
+    protected static final String[] CONTENT = new String[] { "Health", "Health R", "Mana", "Mana R", "Attack D", "Ability P", "Armor", "Magic R", "Movement S", "Attack S" };
     protected static final int[] ICONS = new int[] {
             R.drawable.ahributtonnormal
     };

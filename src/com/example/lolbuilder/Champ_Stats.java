@@ -248,51 +248,68 @@ public class Champ_Stats extends Activity{
 			for(Map.Entry<String, Double> entry : fullUnique.entrySet()){
 				name = entry.getKey().toString();
 				speed = entry.getValue();
-				if(name.contains("Boots of Speed") && !hasBoot){
-						hasBoot = true;
+				if(name.contains("Boots of Speed")){
+					if(currSpeed < speed){
+						if(!hasBoot)		
+							hasBoot = true;	
 						currSpeed = speed;
+					}
 				}
 				else
-					if(currSpeed < speed && name.contains("Mercury's Treads")){
-						if(!hasBoot)
-							hasBoot = true;
-						currSpeed = speed;
+					if(name.contains("Mercury's Treads")){
+						if(currSpeed < speed){
+							if(!hasBoot)
+								hasBoot = true;
+							currSpeed = speed;
+						}
 					}
 				else
-					if(currSpeed < speed && name.contains("Sorcerer's Shoes")){
-						if(!hasBoot)
-							hasBoot = true;
-						currSpeed = speed;
+					if(name.contains("Sorcerer's Shoes")){
+						if(currSpeed < speed){
+							if(!hasBoot)
+								hasBoot = true;
+							currSpeed = speed;
+						}
 					}
 				else
-					if(currSpeed < speed && name.contains("Berserker's Greaves")){
-						if(!hasBoot)
-							hasBoot = true;
-						currSpeed = speed;
+					if(name.contains("Berserker's Greaves")){
+						if(currSpeed < speed){	
+							if(!hasBoot)
+								hasBoot = true;
+							currSpeed = speed;
+						}
 					}
 				else
-					if(currSpeed < speed && name.contains("Ninja Tabi")){
-						if(!hasBoot)
-							hasBoot = true;
-						currSpeed = speed;
+					if(name.contains("Ninja Tabi")){
+						if(currSpeed < speed){	
+							if(!hasBoot)
+								hasBoot = true;
+							currSpeed = speed;
+						}
 					}
 				else
-					if(currSpeed < speed && name.contains("Boots of Swiftness")){
-						if(!hasBoot)
-							hasBoot = true;
-						currSpeed = speed;
+					if(name.contains("Boots of Swiftness")){
+						if(currSpeed < speed){	
+							if(!hasBoot)
+								hasBoot = true;
+							currSpeed = speed;
+						}
 					}
 				else
-					if(currSpeed < speed && name.contains("Ionian Boots of Lucidity")){
-						if(!hasBoot)
-							hasBoot = true;
-						currSpeed = speed;
+					if(name.contains("Ionian Boots of Lucidity")){
+						if(currSpeed < speed){	
+							if(!hasBoot)
+								hasBoot = true;
+							currSpeed = speed;
+						}
 					}
 				else 
-					if(currSpeed < speed && name.contains("Boots of Mobility")){
-						if(!hasBoot)
-							hasBoot = true;
-						currSpeed = speed;
+					if(name.contains("Boots of Mobility")){
+						if(currSpeed < speed){	
+							if(!hasBoot)
+								hasBoot = true;
+							currSpeed = speed;
+						}
 					}
 				else 
 					msStat += currSpeed;

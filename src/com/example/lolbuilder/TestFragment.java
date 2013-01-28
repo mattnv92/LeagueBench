@@ -3,16 +3,11 @@ package com.example.lolbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.lolbuilder.Item_List.ImageAdapterAd;
-
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -32,9 +27,11 @@ public final class TestFragment extends Fragment {
     private ArrayList<Integer> mpIcons = new ArrayList<Integer>();
     private ArrayList<Integer> mpRIcons = new ArrayList<Integer>();
     private ArrayList<Integer> mrIcons = new ArrayList<Integer>();
+    private ArrayList<Integer> msIcons = new ArrayList<Integer>();
     private ArrayList<Integer> armorIcons = new ArrayList<Integer>();
     private ArrayList<Integer> adIcons = new ArrayList<Integer>();
     private ArrayList<Integer> apIcons = new ArrayList<Integer>();
+    private ArrayList<Integer> asIcons = new ArrayList<Integer>();
     
     public static TestFragment newInstance(String content) {
         TestFragment fragment = new TestFragment();
@@ -156,6 +153,30 @@ public final class TestFragment extends Fragment {
 			gvMpR.setAdapter(new ImageAdapterMpR(getActivity()));
     	}
     	
+    	if(mContent.equalsIgnoreCase("Movement S")){
+    		View v = inflater.inflate(R.layout.gv_ms_inflate, ll, false);
+        	ll.addView(v);
+	    	GridView gvMs = (GridView) v.findViewById(R.id.gvMs);
+			
+			gvMs.setOnItemClickListener(new OnItemClickListener() {
+		        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		        	Database db = new Database(getActivity());
+		        	try{
+		        		db.openRead();
+		        		((Item_List) getActivity()).addItemToSlot(db.getButtonById(msIcons.get(position)));
+		        	}
+		        	catch(Exception e){
+		        		e.printStackTrace();
+		        	}
+		        	finally{
+		        		db.close();
+		        	}
+		        }
+		    });
+			
+			gvMs.setAdapter(new ImageAdapterMs(getActivity()));
+    	}
+    	
     	if(mContent.equalsIgnoreCase("Armor")){
     		View v = inflater.inflate(R.layout.gv_armor_inflate, ll, false);
         	ll.addView(v);
@@ -228,6 +249,32 @@ public final class TestFragment extends Fragment {
 			
 			gvAp.setAdapter(new ImageAdapterAp(getActivity()));
     	}
+    	
+
+    	if(mContent.equalsIgnoreCase("Attack S")){
+    		View v = inflater.inflate(R.layout.gv_as_inflate, ll, false);
+        	ll.addView(v);
+	    	GridView gvAs = (GridView) v.findViewById(R.id.gvAs);
+			
+			gvAs.setOnItemClickListener(new OnItemClickListener() {
+		        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		        	Database db = new Database(getActivity());
+		        	try{
+		        		db.openRead();
+		        		((Item_List) getActivity()).addItemToSlot(db.getButtonById(asIcons.get(position)));
+		        	}
+		        	catch(Exception e){
+		        		e.printStackTrace();
+		        	}
+		        	finally{
+		        		db.close();
+		        	}
+		        }
+		    });
+			
+			gvAs.setAdapter(new ImageAdapterAs(getActivity()));
+    	}
+    	
     	
     	if(mContent.equalsIgnoreCase("Magic R")){
     		View v = inflater.inflate(R.layout.gv_mr_inflate, ll, false);
@@ -577,6 +624,113 @@ public final class TestFragment extends Fragment {
 		        }
 
 		        imageView.setImageResource(apIcons.get(position));
+		        return imageView;
+		    }
+	    }
+	    
+	    public class ImageAdapterAs extends BaseAdapter {
+		    private Context mContext;
+		    Database db;
+		    
+		    public ImageAdapterAs(Context c) {
+		        mContext = c;
+		        db = new Database(c);
+		        populate();
+		    }
+
+		    public int getCount() {
+		        return asIcons.size();
+		    }
+
+		    public Object getItem(int position) {
+		        return null;
+		    }
+
+		    public long getItemId(int position) {
+		        return asIcons.get(position);
+		    }
+		    
+		    public void populate() {
+		    	try{
+		    		db.openRead();
+		    		asIcons = db.getItemCategoryAs();
+		    	}
+		    	catch(Exception e){
+		    		e.printStackTrace();
+		    	}
+		    	finally{
+		    		db.close();
+		    	}
+		    }
+		    
+
+		    // create a new ImageView for each item referenced by the Adapter
+		    public View getView(int position, View convertView, ViewGroup parent) {
+		        ImageView imageView;
+		        if (convertView == null) {  // if it's not recycled, initialize some attributes
+		            imageView = new ImageView(mContext);
+		            imageView.setLayoutParams(new GridView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+		            imageView.setPadding(8, 8, 8, 8);
+		        } else {
+		            imageView = (ImageView) convertView;
+		        }
+
+		        imageView.setImageResource(asIcons.get(position));
+		        return imageView;
+		    }
+	    }
+	    
+	    
+	    public class ImageAdapterMs extends BaseAdapter {
+		    private Context mContext;
+		    Database db;
+		    
+		    public ImageAdapterMs(Context c) {
+		        mContext = c;
+		        db = new Database(c);
+		        populate();
+		    }
+
+		    public int getCount() {
+		        return msIcons.size();
+		    }
+
+		    public Object getItem(int position) {
+		        return null;
+		    }
+
+		    public long getItemId(int position) {
+		        return msIcons.get(position);
+		    }
+		    
+		    public void populate() {
+		    	try{
+		    		db.openRead();
+		    		msIcons = db.getItemCategoryMs();
+		    	}
+		    	catch(Exception e){
+		    		e.printStackTrace();
+		    	}
+		    	finally{
+		    		db.close();
+		    	}
+		    }
+		    
+
+		    // create a new ImageView for each item referenced by the Adapter
+		    public View getView(int position, View convertView, ViewGroup parent) {
+		        ImageView imageView;
+		        if (convertView == null) {  // if it's not recycled, initialize some attributes
+		            imageView = new ImageView(mContext);
+		            imageView.setLayoutParams(new GridView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+		            imageView.setPadding(8, 8, 8, 8);
+		        } else {
+		            imageView = (ImageView) convertView;
+		        }
+
+		        imageView.setImageResource(msIcons.get(position));
 		        return imageView;
 		    }
 	    }

@@ -946,6 +946,12 @@ public class Database {
 			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
 			cv.clear();
 			
+			cv.put(KEY_ITEMICONNAME, "Chalice of Harmony");
+			cv.put(KEY_ITEMICON, R.drawable.cohbuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.coh);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
 			cv.put(KEY_ITEMICONNAME, "Dagger");
 			cv.put(KEY_ITEMICON, R.drawable.dagbuttonnormal);
 			cv.put(KEY_ITEMBUTTON, R.drawable.dagger);
@@ -961,6 +967,12 @@ public class Database {
 			cv.put(KEY_ITEMICONNAME, "Doran's Ring");
 			cv.put(KEY_ITEMICON, R.drawable.dringbuttonnormal);
 			cv.put(KEY_ITEMBUTTON, R.drawable.doran_ring);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ITEMICONNAME, "Emblem of Valor");
+			cv.put(KEY_ITEMICON, R.drawable.eovbuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.eov);
 			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
 			cv.clear();
 			
@@ -982,15 +994,45 @@ public class Database {
 			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
 			cv.clear();
 			
+			cv.put(KEY_ITEMICONNAME, "Frozen Mallet");
+			cv.put(KEY_ITEMICON, R.drawable.fmbuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.frozen_mallet);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
 			cv.put(KEY_ITEMICONNAME, "Giant's Belt");
 			cv.put(KEY_ITEMICON, R.drawable.giantbeltbuttonnormal);
 			cv.put(KEY_ITEMBUTTON, R.drawable.giants_belt);
 			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
 			cv.clear();
 			
+			cv.put(KEY_ITEMICONNAME, "Glacial Shroud");
+			cv.put(KEY_ITEMICON, R.drawable.glacialshroudbuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.glacial_shroud);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ITEMICONNAME, "Guardian's Angel");
+			cv.put(KEY_ITEMICON, R.drawable.gabuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.ga);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
 			cv.put(KEY_ITEMICONNAME, "Haunting Guise");
 			cv.put(KEY_ITEMICON, R.drawable.hauntgbuttonnormal);
 			cv.put(KEY_ITEMBUTTON, R.drawable.haunting_guise);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ITEMICONNAME, "Iceborn Gauntlet");
+			cv.put(KEY_ITEMICON, R.drawable.icegauntbuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.icegaunt);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ITEMICONNAME, "Infinity Edge");
+			cv.put(KEY_ITEMICON, R.drawable.iebuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.ie);
 			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
 			cv.clear();
 			
@@ -1015,6 +1057,12 @@ public class Database {
 			cv.put(KEY_ITEMICONNAME, "Manamune");
 			cv.put(KEY_ITEMICON, R.drawable.munebuttonnormal);
 			cv.put(KEY_ITEMBUTTON, R.drawable.manamune);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ITEMICONNAME, "Mana Manipulator");
+			cv.put(KEY_ITEMICON, R.drawable.mmbuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.mm);
 			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
 			cv.clear();
 			
@@ -1045,6 +1093,18 @@ public class Database {
 			cv.put(KEY_ITEMICONNAME, "Pickaxe");
 			cv.put(KEY_ITEMICON, R.drawable.pickaxebuttonnormal);
 			cv.put(KEY_ITEMBUTTON, R.drawable.pickaxe);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ITEMICONNAME, "Phage");
+			cv.put(KEY_ITEMICON, R.drawable.phagebuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.phage);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ITEMICONNAME, "Phantom Dancer");
+			cv.put(KEY_ITEMICON, R.drawable.pdbuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.pd);
 			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
 			cv.clear();
 			
@@ -1096,6 +1156,18 @@ public class Database {
 			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
 			cv.clear();
 			
+			cv.put(KEY_ITEMICONNAME, "Ninja Tabi");
+			cv.put(KEY_ITEMICON, R.drawable.tabibuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.tabi);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ITEMICONNAME, "Twin Shadows");
+			cv.put(KEY_ITEMICON, R.drawable.twinshadowsbuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.twin_shadows);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
 			cv.put(KEY_ITEMICONNAME, "Void Staff");
 			cv.put(KEY_ITEMICON, R.drawable.voidstaffbuttonnormal);
 			cv.put(KEY_ITEMBUTTON, R.drawable.void_staff);
@@ -1105,6 +1177,12 @@ public class Database {
 			cv.put(KEY_ITEMICONNAME, "Will of the Ancients");
 			cv.put(KEY_ITEMICON, R.drawable.wotabuttonnormal);
 			cv.put(KEY_ITEMBUTTON, R.drawable.wota);
+			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
+			cv.clear();
+			
+			cv.put(KEY_ITEMICONNAME, "Zeke's Hearld");
+			cv.put(KEY_ITEMICON, R.drawable.zekebuttonnormal);
+			cv.put(KEY_ITEMBUTTON, R.drawable.zeke);
 			db.insertOrThrow(DATABASE_TABLE_ITEMICONS, null, cv);
 			cv.clear();
 			
@@ -1442,13 +1520,12 @@ public class Database {
 			return -1;
 	}
 	
-	public ArrayList<Integer> getItemCategoryMS() throws SQLiteException {
+	public ArrayList<Integer> getItemCategoryMs() throws SQLiteException {
 		
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND (" 
-				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMS + " > 0" + " OR " + DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMUNIQUEMS + " > 0" 
-				+ " OR " + DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMAS + " > 0)", null);
+				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMS + " > 0" + " OR " + DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMUNIQUEMS + " > 0)", null);
 		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
 		if(c1.moveToFirst()){
 			result.add(c1.getInt(iconCol));
@@ -1462,13 +1539,13 @@ public class Database {
 		return result;
 	}
 	
-	public ArrayList<Integer> getItemCategorySPEED() throws SQLiteException {
+	public ArrayList<Integer> getItemCategoryAs() throws SQLiteException {
 		
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
-				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND (" 
-				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMS + " > 0" + " OR " + DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMAS + " > 0)" , null);
+				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
+				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMAS + " > 0" , null);
 		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
 		if(c1.moveToFirst()){
 			result.add(c1.getInt(iconCol));
