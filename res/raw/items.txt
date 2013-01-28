@@ -2,7 +2,7 @@ Boots of Speed~unique 25 Movement Speed~
 Faerie Charm~3 mana Regen~
 Rejuvenation Bead~5 health Regen~
 Giant's Belt~400 Health~
-Cloak of Agility~15 Critical Strike~
+Cloak of Agility~.15 Critical Strike~
 Blasting Wand~40 Ability Power~
 Sapphire Crystal~200 Mana~
 Ruby Crystal~180 Health~
@@ -13,8 +13,8 @@ Long Sword~10 Attack Damage~
 Pickaxe~25 Attack Damage~
 B. F. Sword~45 Attack Damage~
 Hunter's Machete~
-Dagger~12 Attack Speed~
-Recurve Bow~30 Attack Speed~
+Dagger~.12 Attack Speed~
+Recurve Bow~.30 Attack Speed~
 Brawler's Gloves~.08 Critical Strike~
 Amplifying Tome~20 Ability Power~
 Vampiric Scepter~10 Attack Damage~10 Life Steal~
@@ -46,7 +46,7 @@ Abyssal Scepter~70 Ability Power~45 Magic Resist~
 Archangel's Staff~250 Mana~50 Ability Power~10 mana Regen~
 Manamune~250 Mana~10 Attack Damage~7 mana Regen
 Atma's Impaler~45 Armor~15 Critical Strike~
-Berserker's Greaves~ 20 Attack Speed~
+Berserker's Greaves~.20 Attack Speed~
 Boots of Swiftness~unique 60 Movement Speed~
 Catalyst the Protector~200 Health~300 Mana~
 Sorcerer's Shoes~15 Magic Penetration~unique 45 Movement Speed
@@ -64,7 +64,7 @@ Seraph's Embrace~1000 Mana~60 Ability Power~10 mana Regen~
 Mejai's Soulstealer~20 Ability Power
 Muramana~1000 Mana~20 Attack Damage~7 mana Regen~
 Phage~200 Health~20 Attack Damage~
-Phantom Dancer~50 Attack Speed~30 Critical Strike~5 Movement Speed~
+Phantom Dancer~.50 Attack Speed~30 Critical Strike~5 Movement Speed~
 Ninja Tabi~25 Armor~unique 45 Movement Speed
 Zeke's Herald~250 Health~15 Cooldown Reduction~
 Ohmwrecker~350 Health~300 Mana~55 Armor~
@@ -161,11 +161,11 @@ Spirit of the Spectral Wraith~40 Ability Power~10 mana Regen~
 Spirit of the Ancient Golem~500 Health~30 Armor~14 health Regen~7 mana Regen~
 Spirit of the Elder Lizard~50 Attack Damage~14 health Regen~7 mana Regen~
 Mikael's Crucible~300 Mana~40 Magic Resist~9 mana Regen~
-Berserker's Greaves: Homeguard~ 20 Attack Speed~unique 45 Movement Speed~
-Berserker's Greaves: Captain~ 20 Attack Speed~unique 45 Movement Speed~
-Berserker's Greaves: Furor~ 20 Attack Speed~unique 45 Movement Speed~
-Berserker's Greaves: Distortion~ 20 Attack Speed~unique 45 Movement Speed~
-Berserker's Greaves: Alacrity~ 20 Attack Speed~unique 45 Movement Speed~
+Berserker's Greaves: Homeguard~20 Attack Speed~unique 45 Movement Speed~
+Berserker's Greaves: Captain~20 Attack Speed~unique 45 Movement Speed~
+Berserker's Greaves: Furor~20 Attack Speed~unique 45 Movement Speed~
+Berserker's Greaves: Distortion~20 Attack Speed~unique 45 Movement Speed~
+Berserker's Greaves: Alacrity~20 Attack Speed~unique 45 Movement Speed~
 Sorcerer's Shoes: Homeguard~15 Magic Penetration~unique 45 Movement Speed~
 Sorcerer's Shoes: Captain~15 Magic Penetration~unique 45 Movement Speed~
 Sorcerer's Shoes: Furor~15 Magic Penetration~unique 45 Movement Speed~

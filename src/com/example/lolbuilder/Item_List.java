@@ -1,17 +1,15 @@
 package com.example.lolbuilder;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import android.app.ActionBar.LayoutParams;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -28,8 +26,10 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
+import com.viewpagerindicator.TitlePageIndicator;
 
-public class Item_List extends Activity {
+
+public class Item_List extends BaseSampleActivity {
 
 	final int CHAMP_ICON_ID = 101;
 	final int HSCROLL_VIEW_ID = 102;
@@ -44,6 +44,8 @@ public class Item_List extends Activity {
 	private int item4Id = 0;
 	private int item5Id = 0;
 	
+	List<Button> item_slot_buffer = new ArrayList<Button>();
+	
 	//private HashMap<String, Integer> defenseList = new HashMap<String, Integer>();
 	private ArrayList<Integer> defenseIcons = new ArrayList<Integer>();
 	//private HashMap<String, Integer> adList = new HashMap<String, Integer>();
@@ -55,14 +57,15 @@ public class Item_List extends Activity {
 	private ArrayList<Integer> speedIcons = new ArrayList<Integer>();
 	//private HashMap<String, Integer> msList = new HashMap<String, Integer>();
 	
-	List<Button> item_slot_buffer = new ArrayList<Button>();
 	
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_menu);
+        setContentView(R.layout.themed_titles);
         Intent basket = getIntent();
         final int bid = basket.getExtras().getInt("champChosen");
         CHAMP_NAME = basket.getExtras().getString("champName");
+        
+        //Looking for items to put into the slots if you load a saved build
         if(basket.hasExtra("item0"))
         	item0Id = basket.getExtras().getInt("item0");
         if(basket.hasExtra("item1"))
@@ -77,7 +80,58 @@ public class Item_List extends Activity {
         	item5Id = basket.getExtras().getInt("item5");
         
         //Button b = new Button(this);
-        if(item0Id > 0)
+       if(item0Id > 0)
+        	addItemToSlot(item0Id);
+        if(item1Id > 0)
+        	addItemToSlot(item1Id);
+        if(item2Id > 0)
+        	addItemToSlot(item2Id);
+        if(item3Id > 0)
+        	addItemToSlot(item3Id);
+        if(item4Id > 0)
+        	addItemToSlot(item4Id);
+        if(item5Id > 0)
+        	addItemToSlot(item5Id);
+
+        mAdapter = new TestFragmentAdapter(getSupportFragmentManager());
+
+        mPager = (ViewPager)findViewById(R.id.pager);
+        mPager.setAdapter(mAdapter);
+
+        mIndicator = (TitlePageIndicator)findViewById(R.id.indicator);
+        mIndicator.setViewPager(mPager);
+        mIndicator.setCurrentItem(4);
+        
+        init_hsv();
+        init_nextButton(bid);
+        init_champ_portrait(bid);
+    }
+
+	
+	
+
+	
+	/*protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tabsetup);
+        //Intent basket = getIntent();
+        //final int bid = basket.getExtras().getInt("champChosen");
+        //CHAMP_NAME = basket.getExtras().getString("champName");
+        if(basket.hasExtra("item0"))
+        	item0Id = basket.getExtras().getInt("item0");
+        if(basket.hasExtra("item1"))
+        	item1Id = basket.getExtras().getInt("item1");
+        if(basket.hasExtra("item2"))
+        	item2Id = basket.getExtras().getInt("item2");
+        if(basket.hasExtra("item3"))
+        	item3Id = basket.getExtras().getInt("item3");
+        if(basket.hasExtra("item4"))
+        	item4Id = basket.getExtras().getInt("item4");
+        if(basket.hasExtra("item5"))
+        	item5Id = basket.getExtras().getInt("item5");
+        
+        //Button b = new Button(this);
+       if(item0Id > 0)
         	addItemToSlot(item0Id);
         if(item1Id > 0)
         	addItemToSlot(item1Id);
@@ -90,12 +144,19 @@ public class Item_List extends Activity {
         if(item5Id > 0)
         	addItemToSlot(item5Id);
         
-        init_hsv();
-        init_tabhost();
-        init_nextButton(bid);
-        init_champ_portrait(bid);
+        //init_hsv();
+        //init_tabhost();
+        //init_nextButton(bid);
+        //init_champ_portrait(bid);
         
-	}
+        //starting code
+        //PagerAdapter pa = new TestFragmentAdapter(getSupportFragmentManager());
+        ViewPager vp = (ViewPager)findViewById(R.id.pager);
+        TitlePageIndicator tpi = (TitlePageIndicator)findViewById(R.id.indicator);
+        //tpi.setViewPager(vp);
+      
+	}*/
+	
         
 	public void addItemToSlot(int id){
         if(ITEM_SLOT_COUNT_INDEX < 6){	
@@ -180,7 +241,6 @@ public class Item_List extends Activity {
 	        }
 	    });
 		
-		gvDef.setAdapter(new ImageAdapterDef(this));
 		//gvDef.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
         ts = th.newTabSpec("item1_tag");
@@ -188,25 +248,8 @@ public class Item_List extends Activity {
         ts.setIndicator("END");
         th.addTab(ts);
         
-        GridView gvEnd = (GridView) findViewById(R.id.gvIlEnd);
+       
 		
-		gvEnd.setOnItemClickListener(new OnItemClickListener() {
-	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	        	Database db = new Database(Item_List.this);
-	        	try{
-	        		db.openRead();
-	        		addItemToSlot(db.getButtonById(endIcons.get(position)));
-	        	}
-	        	catch(Exception e){
-	        		e.printStackTrace();
-	        	}
-	        	finally{
-	        		db.close();
-	        	}
-	        }
-	    });
-		
-		gvEnd.setAdapter(new ImageAdapterEnd(this));
         
         ts = th.newTabSpec("item2_tag");
         ts.setContent(R.id.AD);
@@ -287,7 +330,7 @@ public class Item_List extends Activity {
 	
 	public void init_hsv(){
 		
-        HorizontalScrollView hsv = (HorizontalScrollView)findViewById(R.id.horizontalScrollView1);
+        HorizontalScrollView hsv = (HorizontalScrollView)findViewById(R.id.horizontalScrollView0);
         RelativeLayout.LayoutParams lphsv = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lphsv.addRule(RelativeLayout.RIGHT_OF, CHAMP_ICON_ID);
         hsv.setLayoutParams(lphsv);
@@ -297,7 +340,7 @@ public class Item_List extends Activity {
 	
 	public void init_champ_portrait(int i){
 		
-        RelativeLayout rl = (RelativeLayout)findViewById(R.id.rlitem_menu);
+        RelativeLayout rl = (RelativeLayout)findViewById(R.id.fld);
         ImageView champIcon = new ImageView(this);
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -310,10 +353,10 @@ public class Item_List extends Activity {
 	
 	public void init_nextButton(final int id) {
 		
-		Button b = (Button)findViewById(R.id.nextbutton);
-		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-		b.setLayoutParams(lp);
+		Button b = (Button)findViewById(R.id.nextbut);
+		//RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		//lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		//b.setLayoutParams(lp);
 		b.setId(NEXTBUTTON_ID);
 		b.setOnClickListener(new View.OnClickListener() {
 			
@@ -346,114 +389,8 @@ public class Item_List extends Activity {
 			}
 		});
 	}
-
-	public class ImageAdapterDef extends BaseAdapter {
-	    private Context mContext;
-	    Database db;
-	    
-	    public ImageAdapterDef(Context c) {
-	        mContext = c;
-	        db = new Database(c);
-	        populate();
-	    }
-
-	    public int getCount() {
-	        return defenseIcons.size();
-	    }
-
-	    public Object getItem(int position) {
-	        return null;
-	    }
-
-	    public long getItemId(int position) {
-	        return defenseIcons.get(position);
-	    }
-	    
-	    public void populate() {
-	    	try{
-	    		db.openRead();
-	    		defenseIcons = db.getItemCategoryDefense();
-	    	}
-	    	catch(Exception e){
-	    		e.printStackTrace();
-	    	}
-	    	finally{
-	    		db.close();
-	    	}
-	    }
-
-	    // create a new ImageView for each item referenced by the Adapter
-	    public View getView(int position, View convertView, ViewGroup parent) {
-	        ImageView imageView;
-	        if (convertView == null) {  // if it's not recycled, initialize some attributes
-	            imageView = new ImageView(mContext);
-	            imageView.setLayoutParams(new GridView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-	            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-	            imageView.setPadding(8, 8, 8, 8);
-	        } else {
-	            imageView = (ImageView) convertView;
-	        }
-
-	        imageView.setImageResource(defenseIcons.get(position));
-	        return imageView;
-	    }
-
-	   
-	}
 	
-	public class ImageAdapterEnd extends BaseAdapter {
-	    private Context mContext;
-	    Database db;
-	    
-	    public ImageAdapterEnd(Context c) {
-	        mContext = c;
-	        db = new Database(c);
-	        populate();
-	    }
-
-	    public int getCount() {
-	        return endIcons.size();
-	    }
-
-	    public Object getItem(int position) {
-	        return null;
-	    }
-
-	    public long getItemId(int position) {
-	        return endIcons.get(position);
-	    }
-	    
-	    public void populate() {
-	    	try{
-	    		db.openRead();
-	    		endIcons = db.getItemCategoryEND();
-	    	}
-	    	catch(Exception e){
-	    		e.printStackTrace();
-	    	}
-	    	finally{
-	    		db.close();
-	    	}
-	    }
-
-	    // create a new ImageView for each item referenced by the Adapter
-	    public View getView(int position, View convertView, ViewGroup parent) {
-	        ImageView imageView;
-	        if (convertView == null) {  // if it's not recycled, initialize some attributes
-	            imageView = new ImageView(mContext);
-	            imageView.setLayoutParams(new GridView.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-	            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-	            imageView.setPadding(8, 8, 8, 8);
-	        } else {
-	            imageView = (ImageView) convertView;
-	        }
-
-	        imageView.setImageResource(endIcons.get(position));
-	        return imageView;
-	    }
-
-	   
-	}
+	
 	
 	public class ImageAdapterAd extends BaseAdapter {
 	    private Context mContext;

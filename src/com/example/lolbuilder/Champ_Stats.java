@@ -549,7 +549,7 @@ public class Champ_Stats extends Activity{
 			Dialog d = new Dialog(this);
 			d.setTitle("Uh Oh!");
 			TextView tv = new TextView(this);
-			tv.setText("The program's stepped on a shroom! Stupid Teemo!");
+			tv.setText(e.getMessage());
 			d.setContentView(tv);
 			d.show();
 		}

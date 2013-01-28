@@ -144,7 +144,7 @@
          android1:layout_height="wrap_content" >
 
          <LinearLayout
-             android1:id="@+id/rlhsv"
+             android1:id="@+id/rlhsvp"
              android1:layout_width="wrap_content"
              android1:layout_height="wrap_content"
              android1:orientation="horizontal" >
