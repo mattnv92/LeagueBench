@@ -1,5 +1,6 @@
 package com.example.lolbuilder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,14 @@ public class Champ_Stats extends Activity{
 	private final int ABILITY_POWER_TV_ID = 1006;
 	private final int MANA_TV_ID = 1007;
 	private final int MOVEMENT_SPEED_TV_ID = 1008;
-	private final int LEVEL_BUTTON_ID = 1009;
+	private final int CRIT_TV_ID = 1009;
+	private final int MR_TV_ID = 1010;
+	private final int AS_TV_ID = 1011;
+	
+	private final int CDR_TV_ID = 1013;
+	private final int RANGE_TV_ID = 1014;
+	private final int MPR_TV_ID = 1015;
+	private final int LEVEL_BUTTON_ID = 1020;
 	private final int TEXT_SIZE = 20;
 	private String champName;
 	private String buildName;
@@ -45,14 +53,32 @@ public class Champ_Stats extends Activity{
 	double healthStat = 0;
 	double healthRegenStat = 0;
 	double armorStat = 0;
+	double mrStat = 0;
 	double adStat = 0;
 	double apStat = 0;
 	double mpStat = 0;
+	double mprStat = 0;
 	double msStat = 0;
+	double asStat = 0;
+	double critStat = 0;
+	double hprStat = 0;
+	double cdrStat = 0;
 	
 	//stats from items
 	private double itemHP = 0;
 	private double itemHR = 0;
+	private double itemAR = 0;
+	private double itemMR = 0;
+	private double itemAD = 0;
+	private double itemAP = 0;
+	private double itemMPR = 0;
+	private double itemMP = 0;
+	private double itemMS = 0;
+	private double itemAS = 0;
+	private double itemCRIT = 0;
+	private double itemCDR = 0;
+	private double itemRANGE = 0;
+	double itemSpeed = 0;
 	
 	//previously set level
 	int setLevel = 1;
@@ -63,6 +89,8 @@ public class Champ_Stats extends Activity{
 	//champ stats list
 	private HashMap<String, Double> champStats = new HashMap<String, Double>();
 	private HashMap<String, Integer> saveBuild = new HashMap<String, Integer>();
+	
+
 	
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +118,13 @@ public class Champ_Stats extends Activity{
 		HashMap<String, Double> item3 = new HashMap<String, Double>();
 		HashMap<String, Double> item4 = new HashMap<String, Double>();
 		HashMap<String, Double> item5 = new HashMap<String, Double>();
-		HashMap<String, Double> uniqueListMS = new HashMap<String, Double>();
-		HashMap<String, Double> fullUnique = new HashMap<String, Double>();
+		//HashMap<String, Double> fullUnique = new HashMap<String, Double>();
+		
+		ArrayList<Item> uniqueListMS = new ArrayList<Item>();
+		HashMap<String, Double> uniqueListMPR = new HashMap<String, Double>();
 		
 		
-		
-		double itemSpeed = 0;
+	
 		double perSpeed = 0;
 		
 		String itemName;
@@ -115,127 +144,129 @@ public class Champ_Stats extends Activity{
 			
 			//get champ stats
 			champStats = db.champStatsByName(champName);
-			healthStat += champStats.get("HP");
-			armorStat += champStats.get("AR");
-			adStat += champStats.get("AD");
-			mpStat += champStats.get("MP");
-			msStat += champStats.get("MS");
-			
 			
 			if(array[0] != 0){
 				itemName = db.getItemById(array[0]);
-				uniqueListMS = db.getUniqueItemMS(itemName);
-				if(uniqueListMS != null)
-					fullUnique.put(itemName, uniqueListMS.get("MS"));
 				item0 = db.getItemStats(itemName);
 				itemSpeed = item0.get("MS");
 				itemHP += item0.get("Health");
-				armorStat += item0.get("Armor");
-				adStat += item0.get("AD");
-				apStat += item0.get("AP");
-				mpStat += item0.get("MP");
-				if(itemSpeed > 0 && itemSpeed < 1){
+				itemAR += item0.get("Armor");
+				itemAD += item0.get("AD");
+				itemAP += item0.get("AP");
+				itemMP += item0.get("MP");
+				itemMR += item0.get("MR");
+				itemCRIT += item0.get("CRIT");
+				itemAS += item0.get("AS");
+				itemCDR += item0.get("CDR");
+				itemHR += item0.get("HPR");
+				itemMPR += item0.get("MPR");
+				//adds in percent speeds (e.g phantom dancer gives .05 ms)
+				if(itemSpeed > 0 && itemSpeed < 1)
 					perSpeed += itemSpeed;
-				}
-				else
-					msStat += itemSpeed;
-				
+				//look for unique stats
+				uniqueListMS.add(db.getUniqueItemMS(itemName));
+				//uniqueMPR = db.getUniqueItemMPR(itemName);
 				saveBuild.put("item0", array[0]);
 				
 			}
 			if(array[1] != 0){
 				itemName = db.getItemById(array[1]);
-				uniqueListMS = db.getUniqueItemMS(itemName);
-				if(uniqueListMS != null)
-					fullUnique.put(itemName, uniqueListMS.get("MS"));
 				item1 = db.getItemStats(itemName);
 				itemHP += item1.get("Health");
-				armorStat += item1.get("Armor");
-				adStat += item1.get("AD");
-				apStat += item1.get("AP");
-				mpStat += item1.get("MP");
+				itemAR += item1.get("Armor");
+				itemAD += item1.get("AD");
+				itemAP += item1.get("AP");
+				itemMP += item1.get("MP");
+				itemMR += item1.get("MR");
+				itemCRIT += item1.get("CRIT");
+				itemAS += item1.get("AS");
 				itemSpeed = item1.get("MS");
-				if(itemSpeed > 0 && itemSpeed < 1){
+				itemCDR += item1.get("CDR");
+				itemHR += item1.get("HPR");
+				itemMPR += item1.get("MPR");
+				if(itemSpeed > 0 && itemSpeed < 1)
 					perSpeed += itemSpeed;
-				}
-				else
-					msStat += itemSpeed;
+				uniqueListMS.add(db.getUniqueItemMS(itemName));
 				saveBuild.put("item1", array[1]);
 			}
 			if(array[2] != 0){
 				itemName = db.getItemById(array[2]);
-				uniqueListMS = db.getUniqueItemMS(itemName);
-				if(uniqueListMS != null)
-					fullUnique.put(itemName, uniqueListMS.get("MS"));
 				item2 = db.getItemStats(itemName);
 				itemHP += item2.get("Health");
 				armorStat += item2.get("Armor");
 				adStat += item2.get("AD");
 				apStat += item2.get("AP");
 				mpStat += item2.get("MP");
+				mrStat += item2.get("MR");
+				critStat += item2.get("CRIT");
+				asStat += item2.get("AS");
+				cdrStat += item2.get("CDR");
+				hprStat += item2.get("HPR");
 				itemSpeed = item2.get("MS");
-				if(itemSpeed > 0 && itemSpeed < 1){
+				itemMPR += item2.get("MPR");
+				if(itemSpeed > 0 && itemSpeed < 1)
 					perSpeed += itemSpeed;
-				}
-				else
-					msStat += itemSpeed;
+				uniqueListMS.add(db.getUniqueItemMS(itemName));
 				saveBuild.put("item2", array[2]);
 			}
 			if(array[3] != 0){
 				itemName = db.getItemById(array[3]);
-				uniqueListMS = db.getUniqueItemMS(itemName);
-				if(uniqueListMS != null)
-					fullUnique.put(itemName, uniqueListMS.get("MS"));
 				item3 = db.getItemStats(itemName);
 				itemHP += item3.get("Health");
-				armorStat += item3.get("Armor");
-				adStat += item3.get("AD");
-				apStat += item3.get("AP");
-				mpStat += item3.get("MP");
+				itemAR += item3.get("Armor");
+				itemAD += item3.get("AD");
+				itemAP += item3.get("AP");
+				itemMP += item3.get("MP");
+				itemMR += item3.get("MR");
+				itemCRIT += item3.get("CRIT");
+				itemAS += item3.get("AS");
 				itemSpeed = item3.get("MS");
-				if(itemSpeed > 0 && itemSpeed < 1){
+				itemCDR += item3.get("CDR");
+				itemHR += item3.get("HPR");
+				itemMPR += item3.get("MPR");
+				if(itemSpeed > 0 && itemSpeed < 1)
 					perSpeed += itemSpeed;
-				}
-				else
-					msStat += itemSpeed;
+				uniqueListMS.add(db.getUniqueItemMS(itemName));
 				saveBuild.put("item3", array[3]);
 			}
 			if(array[4] != 0){
 				itemName = db.getItemById(array[4]);
-				uniqueListMS = db.getUniqueItemMS(itemName);
-				if(uniqueListMS != null)
-					fullUnique.put(itemName, uniqueListMS.get("MS"));
 				item4 = db.getItemStats(itemName);
 				itemHP += item4.get("Health");
-				armorStat += item4.get("Armor");
-				adStat += item4.get("AD");
-				apStat += item4.get("AP");
-				mpStat += item4.get("MP");
+				itemAR += item4.get("Armor");
+				itemAD += item4.get("AD");
+				itemAP += item4.get("AP");
+				itemMP += item4.get("MP");
+				itemMR += item4.get("MR");
+				itemCRIT += item4.get("CRIT");
+				itemAS += item4.get("AS");
 				itemSpeed = item4.get("MS");
-				if(itemSpeed > 0 && itemSpeed < 1){
+				itemCDR += item4.get("CDR");
+				itemHR += item4.get("HPR");
+				itemMPR += item4.get("MPR");
+				if(itemSpeed > 0 && itemSpeed < 1)
 					perSpeed += itemSpeed;
-				}
-				else
-					msStat += itemSpeed;
+				uniqueListMS.add(db.getUniqueItemMS(itemName));
 				saveBuild.put("item4", array[4]);
 			}
 			if(array[5] != 0){
 				itemName = db.getItemById(array[5]);
-				uniqueListMS = db.getUniqueItemMS(itemName);
-				if(uniqueListMS != null)
-					fullUnique.put(itemName, uniqueListMS.get("MS"));
 				item5 = db.getItemStats(itemName);
 				itemHP += item5.get("Health");
-				armorStat += item5.get("Armor");
-				adStat += item5.get("AD");
-				apStat += item5.get("AP");
-				mpStat += item5.get("MP");
+				itemAR += item5.get("Armor");
+				itemAD += item5.get("AD");
+				itemAP += item5.get("AP");
+				itemMP += item5.get("MP");
+				itemMR += item5.get("MR");
+				itemCRIT += item5.get("CRIT");
+				itemAS += item5.get("AS");
 				itemSpeed = item5.get("MS");
-				if(itemSpeed > 0 && itemSpeed < 1){
+				itemCDR += item5.get("CDR");
+				itemHR += item5.get("HPR");
+				itemMPR += item5.get("MPR");
+				if(itemSpeed > 0 && itemSpeed < 1)
 					perSpeed += itemSpeed;
-				}
-				else
-					msStat += itemSpeed;
+				uniqueListMS.add(db.getUniqueItemMS(itemName));
 				saveBuild.put("item5", array[5]);
 			}
 			
@@ -245,88 +276,72 @@ public class Champ_Stats extends Activity{
 			boolean hasBoot = false;
 			String name;
 			double speed;
-			for(Map.Entry<String, Double> entry : fullUnique.entrySet()){
-				name = entry.getKey().toString();
-				speed = entry.getValue();
-				if(name.contains("Boots of Speed")){
+			for(Item i : uniqueListMS){
+				name = i.getName();
+				speed = i.getStat();
+				if(name.equals("Boots of Speed")){
 					if(currSpeed < speed){
-						if(!hasBoot)		
-							hasBoot = true;	
 						currSpeed = speed;
 					}
 				}
 				else
-					if(name.contains("Mercury's Treads")){
+					if(name.equals("Mercury's Treads")){
 						if(currSpeed < speed){
-							if(!hasBoot)
-								hasBoot = true;
 							currSpeed = speed;
 						}
 					}
 				else
-					if(name.contains("Sorcerer's Shoes")){
+					if(name.equals("Sorcerer's Shoes")){
 						if(currSpeed < speed){
-							if(!hasBoot)
-								hasBoot = true;
 							currSpeed = speed;
 						}
 					}
 				else
-					if(name.contains("Berserker's Greaves")){
+					if(name.equals("Berserker's Greaves")){
 						if(currSpeed < speed){	
-							if(!hasBoot)
-								hasBoot = true;
 							currSpeed = speed;
 						}
 					}
 				else
-					if(name.contains("Ninja Tabi")){
+					if(name.equals("Ninja Tabi")){
 						if(currSpeed < speed){	
-							if(!hasBoot)
-								hasBoot = true;
 							currSpeed = speed;
 						}
 					}
 				else
-					if(name.contains("Boots of Swiftness")){
+					if(name.equals("Boots of Swiftness")){
 						if(currSpeed < speed){	
-							if(!hasBoot)
-								hasBoot = true;
 							currSpeed = speed;
 						}
 					}
 				else
-					if(name.contains("Ionian Boots of Lucidity")){
+					if(name.equals("Ionian Boots of Lucidity")){
 						if(currSpeed < speed){	
-							if(!hasBoot)
-								hasBoot = true;
 							currSpeed = speed;
 						}
 					}
 				else 
-					if(name.contains("Boots of Mobility")){
+					if(name.equals("Boots of Mobility")){
 						if(currSpeed < speed){	
-							if(!hasBoot)
-								hasBoot = true;
 							currSpeed = speed;
 						}
 					}
-				else 
-					msStat += currSpeed;
 			}
-			msStat += currSpeed;
-			// end of movement speed stack fixing
+			itemMS += currSpeed; 
+			// end of boots movement speed stack fixing
+			//add unique mpr items to champion stats
+			
 			
 			//time to add in the percentages of the speed after adding the appropriate ms from the boots chosen if any boots were chosen at all
-			double tempSpeed = 0;
-			tempSpeed = perSpeed * msStat;
-			msStat += tempSpeed;
+			itemMS += perSpeed * itemMS;
+			
+			
 			
 			final TextView healthTv = new TextView(this);
 			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
 			healthTv.setTextColor(Color.rgb(255, 255, 255));
-			healthTv.setText(padding + "Health" + " : " + (champStats.get("HP") + itemHP));
+			healthTv.setText(padding + "Health" + " : " + round((champStats.get("HP") + itemHP)));
 			healthTv.setLayoutParams(lp);
 			healthTv.setId(HEALTH_TV_ID);
 			healthTv.setTextSize(TEXT_SIZE);
@@ -337,66 +352,132 @@ public class Champ_Stats extends Activity{
 			lp.addRule(RelativeLayout.BELOW, healthTv.getId());
 			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
 			healthRegenTv.setTextColor(Color.rgb(255, 255, 255));
-			healthRegenTv.setText(padding + "HealthR" + " : " + champStats.get("HR"));
+			healthRegenTv.setText(padding + "HealthR" + " : " + round(champStats.get("HR") + itemHR));
 			healthRegenTv.setLayoutParams(lp);
 			healthRegenTv.setId(HEALTH_REGEN_TV_ID);
 			healthRegenTv.setTextSize(TEXT_SIZE);
 			rl.addView(healthRegenTv);
 			
-			TextView armorTv = new TextView(this);
+			final TextView armorTv = new TextView(this);
 			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lp.addRule(RelativeLayout.BELOW, healthRegenTv.getId());
 			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
 			armorTv.setTextColor(Color.rgb(255, 255, 255));
 			armorTv.setTextSize(TEXT_SIZE);
-			armorTv.setText(padding + "Armor" + " : " + armorStat);
+			armorTv.setText(padding + "Armor" + " : " + round(champStats.get("AR") + itemAR));
 			armorTv.setLayoutParams(lp);
 			armorTv.setId(ARMOR_TV_ID);
 			rl.addView(armorTv);
 			
-			TextView adTv = new TextView(this);
+			final TextView adTv = new TextView(this);
 			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lp.addRule(RelativeLayout.BELOW, armorTv.getId());
 			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
 			adTv.setTextColor(Color.rgb(255, 255, 255));
-			adTv.setText(padding + "AttackD" + " : " + adStat);
+			adTv.setText(padding + "AttackD" + " : " + round((champStats.get("AD") + itemAD)));
 			adTv.setLayoutParams(lp);
 			adTv.setId(ATTACK_DAMAGE_TV_ID);
 			adTv.setTextSize(TEXT_SIZE);
 			rl.addView(adTv);
 			
-			TextView apTv = new TextView(this);
+			final TextView apTv = new TextView(this);
 			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lp.addRule(RelativeLayout.BELOW, adTv.getId());
 			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
 			apTv.setTextColor(Color.rgb(255, 255, 255));
-			apTv.setText(padding + "AbilityP" + " : " + apStat);
+			apTv.setText(padding + "AbilityP" + " : " + round(itemAP));
 			apTv.setLayoutParams(lp);
 			apTv.setId(ABILITY_POWER_TV_ID);
 			apTv.setTextSize(TEXT_SIZE);
 			rl.addView(apTv);
 			
-			TextView mpTv = new TextView(this);
+			final TextView mpTv = new TextView(this);
 			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lp.addRule(RelativeLayout.BELOW, apTv.getId());
 			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
 			mpTv.setTextColor(Color.rgb(255, 255, 255));
-			mpTv.setText(padding + "Mana" + " : " + mpStat);
+			mpTv.setText(padding + "Mana" + " : " + round((champStats.get("MP") + itemMP)));
 			mpTv.setLayoutParams(lp);
 			mpTv.setId(MANA_TV_ID);
 			mpTv.setTextSize(TEXT_SIZE);
 			rl.addView(mpTv);
 			
-			TextView msTv = new TextView(this);
+			final TextView msTv = new TextView(this);
 			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lp.addRule(RelativeLayout.BELOW, mpTv.getId());
 			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
 			msTv.setTextColor(Color.rgb(255, 255, 255));
-			msTv.setText(padding + "MoveS" + " : " + msStat);
+			msTv.setText(padding + "MoveS" + " : " + round((champStats.get("MS") + itemMS)));
 			msTv.setLayoutParams(lp);
 			msTv.setId(MOVEMENT_SPEED_TV_ID);
 			msTv.setTextSize(TEXT_SIZE);
 			rl.addView(msTv);
+			
+			final TextView mrTv = new TextView(this);
+			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			lp.addRule(RelativeLayout.BELOW, msTv.getId());
+			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
+			mrTv.setTextColor(Color.rgb(255, 255, 255));
+			mrTv.setText(padding + "MagicR" + " : " + round((champStats.get("MR") + itemMR)));
+			mrTv.setLayoutParams(lp);
+			mrTv.setId(MR_TV_ID);
+			mrTv.setTextSize(TEXT_SIZE);
+			rl.addView(mrTv);
+			
+			final TextView asTv = new TextView(this);
+			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			lp.addRule(RelativeLayout.BELOW, mrTv.getId());
+			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
+			asTv.setTextColor(Color.rgb(255, 255, 255));
+			asTv.setText(padding + "AttackS" + " : " + round((champStats.get("AS") + itemAS)));
+			asTv.setLayoutParams(lp);
+			asTv.setId(AS_TV_ID);
+			asTv.setTextSize(TEXT_SIZE);
+			rl.addView(asTv);
+			
+			final TextView critTv = new TextView(this);
+			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			lp.addRule(RelativeLayout.BELOW, asTv.getId());
+			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
+			critTv.setTextColor(Color.rgb(255, 255, 255));
+			critTv.setText(padding + "Crit" + " : " + round(itemCRIT));
+			critTv.setLayoutParams(lp);
+			critTv.setId(CRIT_TV_ID);
+			critTv.setTextSize(TEXT_SIZE);
+			rl.addView(critTv);
+			
+			final TextView cdrTv = new TextView(this);
+			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			lp.addRule(RelativeLayout.BELOW, critTv.getId());
+			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
+			cdrTv.setTextColor(Color.rgb(255, 255, 255));
+			cdrTv.setText(padding + "Cooldown" + " : " + round(itemCDR));
+			cdrTv.setLayoutParams(lp);
+			cdrTv.setId(CDR_TV_ID);
+			cdrTv.setTextSize(TEXT_SIZE);
+			rl.addView(cdrTv);
+			
+			final TextView mprTv = new TextView(this);
+			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			lp.addRule(RelativeLayout.BELOW, cdrTv.getId());
+			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
+			mprTv.setTextColor(Color.rgb(255, 255, 255));
+			mprTv.setText(padding + "ManaR" + " : " + round((champStats.get("MPR") + itemMPR)));
+			mprTv.setLayoutParams(lp);
+			mprTv.setId(MPR_TV_ID);
+			mprTv.setTextSize(TEXT_SIZE);
+			rl.addView(mprTv);
+			
+			final TextView rangeTv = new TextView(this);
+			lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			lp.addRule(RelativeLayout.BELOW, mprTv.getId());
+			lp.addRule(RelativeLayout.RIGHT_OF, iv.getId());
+			rangeTv.setTextColor(Color.rgb(255, 255, 255));
+			rangeTv.setText(padding + "Range" + " : " + round((champStats.get("RANGE") + itemRANGE)));
+			rangeTv.setLayoutParams(lp);
+			rangeTv.setId(RANGE_TV_ID);
+			rangeTv.setTextSize(TEXT_SIZE);
+			rl.addView(rangeTv);
 			
 			final LinearLayout rel = (LinearLayout)findViewById(R.id.csrl);
 			LinearLayout.LayoutParams lpl = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -438,12 +519,24 @@ public class Champ_Stats extends Activity{
 							if(setLevel != temp){
 								setLevel = temp;
 								if(setLevel > 1){	
-									healthTv.setText(padding + "Health" + " : " + ((setLevel * champStats.get("HPPL")) + champStats.get("HP") + itemHP));
-									healthRegenTv.setText(padding + "HealthR" + " : " + ((setLevel * champStats.get("HRPL")) + champStats.get("HR") + itemHR));
+									healthTv.setText(padding + "Health" + " : " + round(((setLevel * champStats.get("HPPL")) + champStats.get("HP") + itemHP)));
+									healthRegenTv.setText(padding + "HealthR" + " : " + round(((setLevel * champStats.get("HRPL")) + champStats.get("HR") + itemHR)));
+									armorTv.setText(padding + "Armor" + " : " + round(((setLevel * champStats.get("ARPL")) + champStats.get("AR") + itemAR)));
+									adTv.setText(padding + "AttackD" + " : " + round(((setLevel * champStats.get("ADPL")) + champStats.get("AD") + itemAD)));
+									mpTv.setText(padding + "Mana" + " : " + round(((setLevel * champStats.get("MPPL")) + champStats.get("MP") + itemMP)));
+									mrTv.setText(padding + "MagicR" + " : " + round(((setLevel * champStats.get("MRPL")) + champStats.get("MR") + itemMR)));
+									asTv.setText(padding + "AttackS" + " : " + round(((setLevel * champStats.get("ASPL")) + champStats.get("AS") + itemAS)));
+									mprTv.setText(padding + "ManaR" + " : " + round(((setLevel * champStats.get("MPRPL")) + champStats.get("MPR") + itemMPR)));
 								}
 								else{
-									healthTv.setText(padding + "Health" + " : " + (setLevel  + champStats.get("HP") + itemHP));
-									healthRegenTv.setText(padding + "HealthR" + " : " + (setLevel + champStats.get("HR") + itemHR));
+									healthTv.setText(padding + "Health" + " : " + round((champStats.get("HP") + itemHP)));
+									healthRegenTv.setText(padding + "HealthR" + " : " + round((champStats.get("HR") + itemHR)));
+									armorTv.setText(padding + "Armor" + " : " + round((champStats.get("AR") + itemAR)));
+									adTv.setText(padding + "AttackD" + " : " + round((champStats.get("AD") + itemAD)));
+									mpTv.setText(padding + "Mana" + " : " + round((champStats.get("MP") + itemMP)));
+									mrTv.setText(padding + "MagicR" + " : " + round((champStats.get("MR") + itemMR)));
+									asTv.setText(padding + "AttackS" + " : " + round((champStats.get("AS") + itemAS)));
+									mprTv.setText(padding + "ManaR" + " : " + round((champStats.get("MPR") + itemMPR)));
 								}
 							}
 						}
@@ -575,5 +668,8 @@ public class Champ_Stats extends Activity{
 		
 	}
 	
+	double round(double val) {
+		return Math.round( val * 100.0 ) / 100.0;
+	}
 
 }

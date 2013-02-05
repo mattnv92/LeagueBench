@@ -69,16 +69,27 @@ public class Database {
 	public static final String KEY_ITEMHP = "item_hp";
 	public static final String KEY_ITEMHPR = "item_hpr";
 	public static final String KEY_ITEMAR = "item_ar";
-	public static final String KEY_ITEMUNIQUEMS = "item_unique";
+	//public static final String KEY_ITEMUNIQUEMS = "item_uniquems";
+	//public static final String KEY_ITEMUNIQUEMPR = "item_uniquempr";
 	public static final String KEY_ITEMAD = "item_ad";
 	public static final String KEY_ITEMAP = "item_ap";
 	public static final String KEY_ITEMAS = "item_as";
 	public static final String KEY_ITEMMP = "item_mp";
 	public static final String KEY_ITEMMR = "item_mr";
 	public static final String KEY_ITEMMPR = "item_mpr";
+	public static final String KEY_ITEMCRIT = "item_crit";
+	public static final String KEY_ITEMCDR = "item_cdr";
 	//public static final String KEY_ITEMCOST = "item_cost";
 	//Items Table
 	
+	//unique items table
+	private static final String DATABASE_TABLE_ITEMUNIQUESTATS = "unique_items_table";
+	
+	public static final String KEY_ITEMUNIQUESTATSID = "_id";
+	public static final String KEY_ITEMUNIQUENAME = "item_uniquename";
+	public static final String KEY_ITEMUNIQUEDESC = "item_uniquedesc";
+	public static final String KEY_ITEMUNIQUEMS = "item_uniquems";
+	public static final String KEY_ITEMUNIQUEMPR = "item_uniquempr";
 	//Item Icons Table
 	private static final String DATABASE_TABLE_ITEMICONS = "champ_itemicon_table";
 	
@@ -125,8 +136,17 @@ public class Database {
 					"CREATE TABLE " + DATABASE_TABLE_ITEMSTATS + " (" + KEY_ITEMSTATSID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ KEY_ITEMNAME + " TEXT NOT NULL, " + KEY_ITEMMS + " REAL, " + KEY_ITEMHP + " INTEGER, " + KEY_ITEMHPR + 
 					" INTEGER, " + KEY_ITEMAR + " INTEGER, " + KEY_ITEMAD + " INTEGER, " + KEY_ITEMAP + " INTEGER, " + KEY_ITEMAS + " REAL, " 
-					+ KEY_ITEMMP + " INTEGER, " + KEY_ITEMMPR + " INTEGER, " + KEY_ITEMMR + " INTEGER, " + KEY_ITEMUNIQUEMS + " REAL);" 
+					+ KEY_ITEMMP + " INTEGER, " + KEY_ITEMMPR + " INTEGER, " + KEY_ITEMMR + " INTEGER, " + KEY_ITEMCRIT + " REAL, " 
+					+ KEY_ITEMCDR + " REAL);" 
 			);
+			
+			// Building table for unique item stats
+			db.execSQL(
+					"CREATE TABLE " + DATABASE_TABLE_ITEMUNIQUESTATS + " (" + KEY_ITEMUNIQUESTATSID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ KEY_ITEMUNIQUENAME + " TEXT NOT NULL, "  + KEY_ITEMUNIQUEMPR + " REAL, " 
+					+ KEY_ITEMUNIQUEDESC + " TEXT, " + KEY_ITEMUNIQUEMS + " REAL);"
+			);
+			
 			// Building table for Item Icons
 			db.execSQL(
 					"CREATE TABLE " + DATABASE_TABLE_ITEMICONS + " (" + KEY_ITEMICONID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -1244,9 +1264,17 @@ public class Database {
 			}
 		}
 		
+/* This Algorithm extracts data from the items.txt file and 
+ * stores that data into the Database.
+ * DATA IS GUARANTEED TO BE AND STAY IN SAME FORMAT IN THE ITEMS.TXT FILE 
+ */
 		public void generateItemsTable(SQLiteDatabase db) {
-			ContentValues cv = new ContentValues();
+			
+			ContentValues cv = new ContentValues(); //content values to store into item stats table
+			ContentValues ucv = new ContentValues(); //content values to store into the unique item stats table
+
 			Scanner input = new Scanner(myContext.getResources().openRawResource(R.raw.items));
+			
 			while(input.hasNext()){
 				String stat;
 				String num[];
@@ -1254,11 +1282,25 @@ public class Database {
 				String item_name = line.nextToken("~");
 				cv.put(KEY_ITEMNAME, item_name);
 				while(line.hasMoreTokens()){
-					stat = line.nextToken("~");
+					stat = line.nextToken("~"); 
 					num = stat.split(" ");
 					if(stat.contains("unique")){
+						ucv.put(KEY_ITEMUNIQUENAME, item_name);
+						if(stat.contains("/")){											//Grabbing unique item descriptors (e.g Mana Warp)
+							StringTokenizer uniqueLine = new StringTokenizer(stat);
+							uniqueLine.nextToken("/");
+							String uniqueName = uniqueLine.nextToken("/");
+							ucv.put(KEY_ITEMUNIQUEDESC, uniqueName);
+							String tok = uniqueLine.nextToken("/");
+							num = tok.split(" ");
+						}
 						if(stat.contains("Movement Speed"))
-							cv.put(KEY_ITEMUNIQUEMS, Double.parseDouble(num[1]));
+							ucv.put(KEY_ITEMUNIQUEMS, Double.parseDouble(num[1]));
+						if(stat.contains("mana Regen"))
+							ucv.put(KEY_ITEMUNIQUEMPR, Double.parseDouble(num[1]));
+						
+						db.insertOrThrow(DATABASE_TABLE_ITEMUNIQUESTATS, null, ucv);
+						ucv.clear();
 					}
 					else{
 						if(stat.contains("Movement Speed"))
@@ -1281,11 +1323,16 @@ public class Database {
 							cv.put(KEY_ITEMMR, Integer.parseInt(num[0]));
 						if(stat.contains("Attack Speed"))
 							cv.put(KEY_ITEMAS, Double.parseDouble(num[0]));
+						if(stat.contains("Critical Strike"))
+							cv.put(KEY_ITEMCRIT, Double.parseDouble(num[0]));
+						if(stat.contains("Cooldown Reduction"))
+							cv.put(KEY_ITEMCDR, Double.parseDouble(num[0]));
 					}	
 					
 				}
 				db.insertOrThrow(DATABASE_TABLE_ITEMSTATS, null, cv);
 				cv.clear();	
+				//ucv.clear();
 			}
 			
 			
@@ -1424,13 +1471,24 @@ public class Database {
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMPR + " > 0", null);
+		Cursor c2 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMUNIQUESTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
+		+ DATABASE_TABLE_ITEMUNIQUESTATS + "." + KEY_ITEMUNIQUENAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
+		+ DATABASE_TABLE_ITEMUNIQUESTATS + "." + KEY_ITEMUNIQUEMPR + " > 0", null);
 		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
-		if(c1.moveToFirst()){
+		boolean go = c1.moveToFirst();		
+		while(go){
 			result.add(c1.getInt(iconCol));
+			go = c1.moveToNext();
 		}
-		while(c1.moveToNext()){
-			result.add(c1.getInt(iconCol));
+		iconCol = c2.getColumnIndex(KEY_ITEMICON);
+		go = c2.moveToFirst();		
+		while(go){
+			int i = c2.getInt(iconCol);
+			if(!result.contains(i))
+				result.add(i);
+			go = c2.moveToNext();
 		}
+		
 		
 		return result;	
 		
@@ -1460,6 +1518,24 @@ public class Database {
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
 		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMR + " > 0", null);
+		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
+		if(c1.moveToFirst()){
+			result.add(c1.getInt(iconCol));
+		}
+		while(c1.moveToNext()){
+			result.add(c1.getInt(iconCol));
+		}
+		
+		return result;	
+		
+	}
+	
+	public ArrayList<Integer> getItemCategoryCdr() throws SQLiteException {
+		
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
+		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND " 
+		+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMCDR + " > 0", null);
 		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
 		if(c1.moveToFirst()){
 			result.add(c1.getInt(iconCol));
@@ -1525,15 +1601,23 @@ public class Database {
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
 				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMNAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND (" 
-				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMS + " > 0" + " OR " + DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMUNIQUEMS + " > 0)", null);
+				+ DATABASE_TABLE_ITEMSTATS + "." + KEY_ITEMMS + " > 0)", null);
+		Cursor c2 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMUNIQUESTATS + ", " + DATABASE_TABLE_ITEMICONS + " WHERE " 
+				+ DATABASE_TABLE_ITEMUNIQUESTATS + "." + KEY_ITEMUNIQUENAME + " = " + DATABASE_TABLE_ITEMICONS + "." + KEY_ITEMICONNAME + " AND (" 
+				+ DATABASE_TABLE_ITEMUNIQUESTATS + "." + KEY_ITEMUNIQUEMS + " > 0)", null);
 		int iconCol = c1.getColumnIndex(KEY_ITEMICON);
-		if(c1.moveToFirst()){
+		boolean go = c1.moveToFirst();		
+		while(go){
 			result.add(c1.getInt(iconCol));
+			go = c1.moveToNext();
 		}
-		else
-			return null;
-		while(c1.moveToNext()){
-			result.add(c1.getInt(iconCol));
+		iconCol = c2.getColumnIndex(KEY_ITEMICON);
+		go = c2.moveToFirst();
+		while(go){
+			int i = c2.getInt(iconCol);
+			if(!result.contains(i))
+				result.add(i);
+			go = c2.moveToNext();
 		}
 		
 		return result;
@@ -1668,19 +1752,56 @@ public class Database {
 	
 	
 	
-	public HashMap<String, Double> getUniqueItemMS(String itemName) {
-		
-		HashMap<String, Double> result = new HashMap<String, Double>();
-		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + " WHERE " + KEY_ITEMNAME + " = ?", new String[] {itemName});
+	public Item getUniqueItemMS(String itemName) {
+		Item result = new Item();
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMUNIQUESTATS + " WHERE " + KEY_ITEMUNIQUENAME + " = ?", new String[] {itemName});
 		int col = c1.getColumnIndex(KEY_ITEMUNIQUEMS);
+		int col1 = c1.getColumnIndex(KEY_ITEMUNIQUEDESC);
 		if(c1.moveToFirst()) {
-			if(c1.getString(col) != null){
-				result.put("MS", c1.getDouble(col));
-				return result;
+			String desc = c1.getString(col1);
+			if(desc != null){
+				result.setName(desc);
+			}
+			else {
+				result.setName(itemName);
+			}
+			result.setStat(c1.getDouble(col));
+		}
+		return result;	
+		
+	}
+	
+	public HashMap<String, Double> getUniqueItemMPR(String itemName) {
+		HashMap<String, Double> result = new HashMap<String, Double>();
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMUNIQUESTATS + " WHERE " + KEY_ITEMUNIQUENAME + " = ?", new String[] {itemName});
+		int col = c1.getColumnIndex(KEY_ITEMUNIQUEMPR);
+		int col1 = c1.getColumnIndex(KEY_ITEMUNIQUEDESC);
+		if(c1.moveToFirst()) {
+			String desc = c1.getString(col1);
+			if(desc != null){
+				result.put(desc,c1.getDouble(col));
+			}
+			else {
+				result.put(itemName, c1.getDouble(col));
 			}
 		}
-		return null;	
+		return result;	
 		
+	}
+	
+	public HashMap<String, Double> getUniqueDesc() {
+		HashMap<String, Double> result = new HashMap<String, Double>();
+		Cursor c1 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMUNIQUESTATS + " WHERE " + KEY_ITEMUNIQUEDESC + " != NULL", null);
+		int desc = c1.getColumnIndex(KEY_ITEMUNIQUEDESC);
+		int ms = c1.getColumnIndex(KEY_ITEMUNIQUEMS);
+		boolean go = c1.moveToFirst();
+		while(go){
+			if(!c1.isNull(ms))
+				result.put(c1.getString(desc), c1.getDouble(ms));
+			
+			go = c1.moveToNext();
+		}
+		return result;
 	}
 	
 	public String getItemById(int itemId) throws SQLiteException {
@@ -1698,10 +1819,16 @@ public class Database {
 		Cursor c2 = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE_ITEMSTATS + " WHERE " + KEY_ITEMNAME + " = ?", new String[] {itemName});
 		int healthCol = c2.getColumnIndex(KEY_ITEMHP);
 		int armorCol = c2.getColumnIndex(KEY_ITEMAR);
+		int mrCol = c2.getColumnIndex(KEY_ITEMMR);
 		int adCol = c2.getColumnIndex(KEY_ITEMAD);
 		int apCol = c2.getColumnIndex(KEY_ITEMAP);
 		int mpCol = c2.getColumnIndex(KEY_ITEMMP);
 		int msCol = c2.getColumnIndex(KEY_ITEMMS);
+		int asCol = c2.getColumnIndex(KEY_ITEMAS);
+		int critCol = c2.getColumnIndex(KEY_ITEMCRIT);
+		int hprCol = c2.getColumnIndex(KEY_ITEMHPR);
+		int cdrCol = c2.getColumnIndex(KEY_ITEMCDR);
+		int mprCol = c2.getColumnIndex(KEY_ITEMMPR);
 		
 		if(c2.moveToFirst()){
 			itemMap.put("Health", c2.getDouble(healthCol));
@@ -1710,6 +1837,12 @@ public class Database {
 			itemMap.put("AP", c2.getDouble(apCol));
 			itemMap.put("MP", c2.getDouble(mpCol));
 			itemMap.put("MS", c2.getDouble(msCol));
+			itemMap.put("CRIT", c2.getDouble(critCol));
+			itemMap.put("MR", c2.getDouble(mrCol));
+			itemMap.put("AS", c2.getDouble(asCol));
+			itemMap.put("CDR", c2.getDouble(cdrCol));
+			itemMap.put("HPR", c2.getDouble(hprCol));
+			itemMap.put("MPR", c2.getDouble(mprCol));
 			return itemMap;
 		}
 		 return null;
@@ -1812,4 +1945,6 @@ public class Database {
 	public void deleteBuild(String buildName) {
 		ourDatabase.delete(DATABASE_TABLE_SAVEBUILD, KEY_SAVEBUILDNAME + " = ?", new String[]{buildName});
 	}
+	
+	
 }

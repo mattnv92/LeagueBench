@@ -23,7 +23,7 @@ Doran's Blade~80 Health~10 Attack Damage~
 Doran's Ring~80 Health~15 Ability Power~3 mana Regen~
 Negatron Cloak~45 Magic Resist~
 Needlessly Large Rod~80 Ability Power~
-Prospector's Blade~20 Attack Damage~5 Life Steal~
+Prospector's Blade~20 Attack Damage~.5 Life Steal~
 Prospector's Ring~40 Ability Power~10 mana Regeneration~
 Spirit Stone~14 health Regen~7 mana Regen~
 Health Potion~
@@ -45,53 +45,53 @@ Explorer's Ward~
 Abyssal Scepter~70 Ability Power~45 Magic Resist~
 Archangel's Staff~250 Mana~50 Ability Power~10 mana Regen~
 Manamune~250 Mana~10 Attack Damage~7 mana Regen
-Atma's Impaler~45 Armor~15 Critical Strike~
-Berserker's Greaves~.20 Attack Speed~
+Atma's Impaler~45 Armor~.15 Critical Strike~
+Berserker's Greaves~.20 Attack Speed~unique 45 Movement Speed~
 Boots of Swiftness~unique 60 Movement Speed~
 Catalyst the Protector~200 Health~300 Mana~
-Sorcerer's Shoes~15 Magic Penetration~unique 45 Movement Speed
+Sorcerer's Shoes~15 Magic Penetration~unique 45 Movement Speed~
 Frozen Mallet~700 Health~30 Attack Damage~
 Twin Shadows~50 Ability Power~30 Magic Resistance~5 Movement Speed~
 Glacial Shroud~300 Mana~40 Armor~
-Iceborn Gauntlet~40 Ability Power~500 Mana~60 Armor~15 Cooldown Reduction
+Iceborn Gauntlet~40 Ability Power~500 Mana~60 Armor~.15 Cooldown Reduction
 Guardian Angel~50 Armor~30 Magic Resist~
 Rod of Ages~450 Health~450 Mana~60 Ability Power~
 Chalice of Harmony~25 Magic Resist~7 mana Regen~
-Infinity Edge~70 Attack Damage~25 Critical Strike~
+Infinity Edge~70 Attack Damage~.25 Critical Strike~
 Last Whisper~40 Attack Damage~
-Mana Manipulator~
+Mana Manipulator~unique/Mana Warp/ 6 mana Regen
 Seraph's Embrace~1000 Mana~60 Ability Power~10 mana Regen~
-Mejai's Soulstealer~20 Ability Power
+Mejai's Soulstealer~20 Ability Power~
 Muramana~1000 Mana~20 Attack Damage~7 mana Regen~
 Phage~200 Health~20 Attack Damage~
-Phantom Dancer~.50 Attack Speed~30 Critical Strike~5 Movement Speed~
-Ninja Tabi~25 Armor~unique 45 Movement Speed
-Zeke's Herald~250 Health~15 Cooldown Reduction~
+Phantom Dancer~.50 Attack Speed~.30 Critical Strike~.05 Movement Speed~
+Ninja Tabi~25 Armor~unique 45 Movement Speed~
+Zeke's Herald~250 Health~.15 Cooldown Reduction~
 Ohmwrecker~350 Health~300 Mana~55 Armor~
 Sheen~200 Mana~25 Ability Power~
 Banner of Command~50 Ability Power~30 Armor~
-Spirit Visage~50 Magic Resist~200 Health~15 Cooldown Reduction~
+Spirit Visage~50 Magic Resist~200 Health~.15 Cooldown Reduction~
 Kindlegem~200 Health
 Sunfire Cape~450 Health~45 Armor
 Shurelya's Reverie~250 Health~10 health Regen~10 mana Regen~
 Tear of the Goddess~250 Mana~7 mana Regen~
-The Black Cleaver~250 Health~50 Attack Damage~10 Cooldown Reduction~
+The Black Cleaver~250 Health~50 Attack Damage~.10 Cooldown Reduction~
 The Bloodthirster~70 Attack Damage~12 Life Steal~
 Ravenous Hydra (Melee Only)~75 Attack Damage~15 health Regen~10 Life Steal~
 Thornmail~100 Armor
 Tiamat (Melee Only)~50 Attack Damage~15 health Regen~
-Trinity Force~30 Attack Damage~30 Ability Power~30 Attack Speed~10 Critical Strike~8 Movement Speed~250 Health~200 Mana~
+Trinity Force~30 Attack Damage~30 Ability Power~30 Attack Speed~.10 Critical Strike~8 Movement Speed~250 Health~200 Mana~
 Warden's Mail~50 Armor~
 Warmog's Armor~1000 Health~
 Overlord's Bloodmail~850 Health~
-Runaan's Hurricane (Ranged Only)~70 Attack Speed~
-Zeal~18 Attack Speed~10 Critical Strike~5 Movement Speed~
-Statikk Shiv~40 Attack Speed~20 Critical Strike~6 Movement Speed~
+Runaan's Hurricane (Ranged Only)~.70 Attack Speed~
+Zeal~18 Attack Speed~.10 Critical Strike~5 Movement Speed~
+Statikk Shiv~40 Attack Speed~.20 Critical Strike~6 Movement Speed~
 Rabadon's Deathcap~120 Ability Power
 Wooglet's Witchcap~100 Ability Power~50 Armor
 Wit's End~40 Attack Speed~20 Magic Resist~
 Shard of True Ice~45 Ability Power~
-Avarice Blade~10 Critical Strike~
+Avarice Blade~.10 Critical Strike~
 Philosopher's Stone~7 health Regen~9 mana Regen~
 Emblem of Valor~20 Armor~
 Kage's Lucky Pick~25 Ability Power~
@@ -105,28 +105,28 @@ Madred's Razors~25 Armor~
 Runic Bulwark~400 Health~20 Armor~30 Magic Resist~
 Fiendish Codex~30 Ability Power~6 mana Regen~
 Force of Nature~76 Magic Resist~20 health Regen~8 Movement Speed~unique 1.75 health Regen~
-Frozen Heart~90 Armor~400 Mana~20 Cooldown Reduction~
+Frozen Heart~90 Armor~400 Mana~.20 Cooldown Reduction~
 Mercury's Treads~25 Magic Resist~unique 45 Movement Speed
-Malady~25 Ability Power~45 Attack Speed~
+Malady~25 Ability Power~.45 Attack Speed~
 Nashor's Tooth~50 Attack Speed~65 Ability Power~10 mana Regen~
 Rylai's Crystal Scepter~500 Health~80 Ability Power
 Boots of Mobility~unique 105 Movement Speed~
-Executioner's Calling~25 Attack Damage~15 Critical Strike~
+Executioner's Calling~25 Attack Damage~.15 Critical Strike~
 Guinsoo's Rageblade~30 Attack Damage~40 Ability Power~
-Madred's Bloodrazor~40 Attack Damage~30 Attack Speed~25 Armor
-Deathfire Grasp~100 Ability Power~15 Cooldown Reduction~
-Sword of the Divine~45 Attack Speed~
+Madred's Bloodrazor~40 Attack Damage~.30 Attack Speed~25 Armor
+Deathfire Grasp~100 Ability Power~.15 Cooldown Reduction~
+Sword of the Divine~.45 Attack Speed~
 Brutalizer~25 Attack Damage~
 Void Staff~70 Ability Power~
 Haunting Guise~25 Ability Power~200 Health~
 Mercurial Scimitar~60 Attack Damage~45 Magic Resist~
 Quicksilver Sash~45 Magic Resist~
 Sword of the Occult~10 Attack Damage~
-Youmuu's Ghostblade~30 Attack Damage~15 Critical Strike~10 Cooldown Reduction~
+Youmuu's Ghostblade~30 Attack Damage~.15 Critical Strike~.10 Cooldown Reduction~
 Randuin's Omen~500 Health~70 Armor~
-Bilgewater Cutlass~40 Attack Damage~10 Life Steal~
+Bilgewater Cutlass~40 Attack Damage~.10 Life Steal~
 Hextech Revolver~40 Ability Power~
-Hextech Gunblade~45 Attack Damage~65 Ability Power~10 Life Steal~20 Spell Vamp~
+Hextech Gunblade~45 Attack Damage~65 Ability Power~.10 Life Steal~unique .20 Spell Vamp~
 Liandry's Torment~70 Ability Power~200 Health~
 Will of the Ancients~50 Ability Power~
 Blade of the Ruined King~40 Attack Damage~10 Life Steal~
@@ -134,16 +134,16 @@ Wriggle's Lantern~15 Attack Damage~30 Armor~10 Life Steal~
 Hexdrinker~25 Attack Damage~25 Magic Resist~
 Maw of Malmortius~55 Attack Damage~36 Magic Resist~
 Zhonya's Hourglass~100 Ability Power~50 Armor
-Ionian Boots of Lucidity~unique 15 Cooldown Reduction~unique 45 Movement Speed~
+Ionian Boots of Lucidity~unique .15 Cooldown Reduction~unique 45 Movement Speed~
 Grez's Spectral Lantern~25 Attack Damage~20 Armor~12 Life Steal~
-Morellonomicon~75 Ability Power~12 mana Regen~20 Cooldown Reduction~
+Morellonomicon~75 Ability Power~12 mana Regen~.20 Cooldown Reduction~
 Bonetooth Necklace~2 Attack Damage per level~
 Moonflair Spellblade~50 Ability Power
-Zephyr~20 Attack Damage~50 Attack Speed~10 Movement Speed~10 Cooldown Reduction~
+Zephyr~20 Attack Damage~50 Attack Speed~10 Movement Speed~.10 Cooldown Reduction~
 Eleisa's Miracle~10 health Regen~15 mana Regen~
 Athene's Unholy Grail~60 Ability Power~40 Magic Resist~15 mana Regen
-Head of Kha'Zix~2 Attack Damage per level~10 Armor Penetration~5 Cooldown Reduction~25 Movement Speed~
-Arcane Helix~400 Health~300 Mana~10 Cooldown Reduction~
+Head of Kha'Zix~2 Attack Damage per level~10 Armor Penetration~.5 Cooldown Reduction~25 Movement Speed~
+Arcane Helix~400 Health~300 Mana~.10 Cooldown Reduction~
 Ionic Spark~40 Attack Speed~250 Health
 Odyn's Veil~350 Health~350 Mana~50 Magic Resist~
 Sanguine Blade~60 Attack Damage~15 Life Steal~
@@ -152,9 +152,9 @@ The Lightbringer~50 Attack Speed~20 Attack Damage
 Kitae's Bloodrazor~30 Attack Damage~40 Attack Speed
 Hextech Sweeper~50 Ability Power~300 Health~
 Blackfire Torch~70 Ability Power~250 Health
-Locket of the Iron Solari~425 Health~35 Armor~10 Cooldown Reduction~10 health Regen per 5~
+Locket of the Iron Solari~425 Health~35 Armor~.10 Cooldown Reduction~10 health Regen per 5~
 Augment: Power~3 Ability Power per level~220 Health~6 health Regen~
-Augment: Gravity~3 Ability Power per level~200 Mana~10 Cooldown Reduction~5 mana Regen~
+Augment: Gravity~3 Ability Power per level~200 Mana~.10 Cooldown Reduction~5 mana Regen~
 Augment: Death~3 Ability Power per level~45 Ability Power~
 The Hex Core~3 Ability Power per level~
 Spirit of the Spectral Wraith~40 Ability Power~10 mana Regen~
@@ -186,11 +186,11 @@ Boots of Mobility: Captain~unique 105 Movement Speed~
 Boots of Mobility: Furor~unique 105 Movement Speed~
 Boots of Mobility: Distortion~unique 105 Movement Speed~
 Boots of Mobility: Alacrity~unique 105 Movement Speed~
-Ionian Boots of Lucidity: Homeguard~unique 15 Cooldown Reduction~unique 45 Movement Speed~
-Ionian Boots of Lucidity: Captain~unique 15 Cooldown Reduction~unique 45 Movement Speed~
-Ionian Boots of Lucidity: Furor~unique 15 Cooldown Reduction~unique 45 Movement Speed~
-Ionian Boots of Lucidity: Distortion~unique 15 Cooldown Reduction~unique 45 Movement Speed~
-Ionian Boots of Lucidity: Alacrity~unique 15 Cooldown Reduction~unique 45 Movement Speed~
+Ionian Boots of Lucidity: Homeguard~unique .15 Cooldown Reduction~unique 45 Movement Speed~
+Ionian Boots of Lucidity: Captain~unique .15 Cooldown Reduction~unique 45 Movement Speed~
+Ionian Boots of Lucidity: Furor~unique .15 Cooldown Reduction~unique 45 Movement Speed~
+Ionian Boots of Lucidity: Distortion~unique .15 Cooldown Reduction~unique 45 Movement Speed~
+Ionian Boots of Lucidity: Alacrity~unique .15 Cooldown Reduction~unique 45 Movement Speed~
 Boots of Swiftness: Homeguard~unique 60 Movement Speed~
 Boots of Swiftness: Captain~unique 60 Movement Speed~
 Boots of Swiftness: Furor~unique 60 Movement Speed~
